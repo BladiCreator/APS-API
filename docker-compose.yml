@@ -1,0 +1,63 @@
+---
+version: "3.8"
+
+services:
+  aps-service-production:
+    container_name: aps-service-production
+    build:
+      target: production
+      context: .
+      args:
+        - PORT=${PORT}
+    ports:
+      - "${PORT}:${PORT}"
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "512m"
+        reservations:
+          cpus: "0.25"
+          memory: "256m"
+
+  aps-service-dev:
+    container_name: aps-service-dev
+    restart: unless-stopped
+    env_file: .env
+    build:
+      target: dev
+      context: .
+      args:
+        - PORT=${PORT}
+    ports:
+      - "${PORT}:${PORT}"
+      - "9229:9229"
+    volumes:
+      - .:/project
+      - node_modules:/project/node_modules/
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "512m"
+        reservations:
+          cpus: "0.25"
+          memory: "256m"
+
+  mysql-aps-dev:
+    image: mysql:8.0
+    container_name: mysql_aps_dev
+    restart: always
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - "3307:3306"
+
+volumes:
+  node_modules:
