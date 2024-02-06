@@ -1,21 +1,21 @@
 {
-  "name": "nestjs-service-template",
+  "name": "aps-api-client",
   "version": "1.0.0",
-  "description": "Template for new nestjs services",
-  "author": "alberthernandezdev@gmail.com",
+  "description": "API for APS web",
+  "author": "bladicreator@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AlbertHernandez/nestjs-service-template/issues"
+    "url": "https://github.com/BladiCreator/APS-API/issues"
   },
-  "homepage": "https://github.com/AlbertHernandez/nestjs-service-template#readme",
+  "homepage": "https://github.com/BladiCreator/APS-API#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlbertHernandez/nestjs-service-template.git"
+    "url": "git+https://github.com/BladiCreator/APS-API.git"
   },
   "keywords": [
     "typescript",
     "nestjs",
-    "template"
+    "api"
   ],
   "engines": {
     "node": ">=18.x",
