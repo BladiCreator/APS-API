@@ -1,11 +1,11 @@
 import { Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { DataSource } from "typeorm";
 
 import { HealthModule } from "@core/health/health.module";
 import { LoggerModule } from "@core/logger/logger.module";
 
-import { TypeOrmConfigService } from "./config/typeormconfig";
 import { ApplicationsModule } from "./resources/applications/applications.module";
 
 @Module({
@@ -17,7 +17,23 @@ import { ApplicationsModule } from "./resources/applications/applications.module
     LoggerModule,
     HealthModule,
     TypeOrmModule.forRootAsync({
-      useClass: TypeOrmConfigService,
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: "mysql",
+        host: configService.get<string>("DATABASE_HOST"),
+        port: configService.get<number>("MYSQL_DOC_PORT"),
+        username: configService.get<string>("MYSQL_USER"),
+        password: configService.get<string>("MYSQL_PASSWORD"),
+        database: configService.get<string>("MYSQL_DATABASE"),
+        autoLoadEntities: true,
+        synchronize: true,
+      }),
+
+      dataSourceFactory: async options => {
+        const dataSource = await new DataSource(options!).initialize();
+        return dataSource;
+      },
     }),
     ApplicationsModule,
   ],

@@ -14,15 +14,17 @@ export class CreateApplicationDto {
   name: string = "";
 
   @IsNumber()
+  @IsNotEmpty()
   @IsPositive()
   price: number = 0;
 
   @IsInt()
+  @IsNotEmpty()
   @IsPositive()
   downloads: number = 0;
 
   @IsString()
   @IsNotEmpty()
-  @MaxLength(5)
+  @MaxLength(9)
   spaces: string = "";
 }

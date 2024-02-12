@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
@@ -18,19 +18,32 @@ export class ApplicationsService {
     return await this.applicationRepository.save(application);
   }
 
-  async findAll() {
+  async findAll(): Promise<Application[]> {
     return await this.applicationRepository.find();
   }
 
-  async findOne(id: string) {
+  async findOne(id: string): Promise<Application | null> {
     return await this.applicationRepository.findOneBy({ id });
   }
 
-  async update(id: string, updateApplicationDto: UpdateApplicationDto) {
-    return await this.applicationRepository.update(id, updateApplicationDto);
+  async update(
+    id: string,
+    updateApplicationDto: UpdateApplicationDto,
+  ): Promise<Application> {
+    return await this.applicationRepository.save({
+      id: id,
+      ...updateApplicationDto,
+    });
   }
 
-  async remove(id: string) {
-    return await this.applicationRepository.softDelete(id);
+  async remove(id: string): Promise<Application> {
+    const application = await this.findOne(id);
+
+    if (!application) {
+      throw new NotFoundException(`Application does not exist!`);
+    }
+
+    await this.applicationRepository.delete(id);
+    return application;
   }
 }
