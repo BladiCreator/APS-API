@@ -37,7 +37,7 @@ export class CategoriesService {
     const category = await this.findOne(id);
 
     if (!category) {
-      throw new NotFoundException(`Application does not exist!`);
+      throw new NotFoundException(`Category does not exist!`);
     }
 
     await this.categoryRepository.delete(id);
