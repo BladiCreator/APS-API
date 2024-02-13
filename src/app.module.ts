@@ -7,6 +7,10 @@ import { HealthModule } from "@core/health/health.module";
 import { LoggerModule } from "@core/logger/logger.module";
 
 import { ApplicationsModule } from "./resources/applications/applications.module";
+import { CategoriesModule } from "./resources/categories/categories.module";
+import { CommentsModule } from "./resources/comments/comments.module";
+import { CompaniesModule } from "./resources/companies/companies.module";
+import { UsersModule } from "./resources/users/users.module";
 
 @Module({
   imports: [
@@ -36,6 +40,10 @@ import { ApplicationsModule } from "./resources/applications/applications.module
       },
     }),
     ApplicationsModule,
+    UsersModule,
+    CompaniesModule,
+    CategoriesModule,
+    CommentsModule,
   ],
 })
 export class AppModule {}
