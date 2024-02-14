@@ -6,6 +6,7 @@ import { DataSource } from "typeorm";
 import { HealthModule } from "@core/health/health.module";
 import { LoggerModule } from "@core/logger/logger.module";
 
+import { AuthModule } from "./auth/auth.module";
 import { ApplicationsModule } from "./resources/applications/applications.module";
 import { CategoriesModule } from "./resources/categories/categories.module";
 import { CommentsModule } from "./resources/comments/comments.module";
@@ -44,6 +45,7 @@ import { UsersModule } from "./resources/users/users.module";
     CompaniesModule,
     CategoriesModule,
     CommentsModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

@@ -1,21 +1,13 @@
-import {
-  IsEmail,
-  IsNotEmpty,
-  IsString,
-  IsStrongPassword,
-  IsUrl,
-} from "class-validator";
+import { IsString, IsUrl, MinLength } from "class-validator";
 
-export class CreateUserDto {
-  @IsNotEmpty()
-  @IsEmail()
-  email: string = ""; // VARCHAR(255) NOT NULL,
+import { UserRegisterDto } from "@src/auth/dto/user-register.dto";
 
-  @IsNotEmpty()
-  @IsStrongPassword()
-  password: string = ""; // VARCHAR(255) NOT NULL, (Encriptado)
+export class CreateUserDto extends UserRegisterDto {
+  @IsString()
+  @MinLength(3)
+  last_name?: string;
 
   @IsString()
   @IsUrl()
-  image_url: string = ""; //Investigate about this
+  image_url?: string; //Investigate about this
 }

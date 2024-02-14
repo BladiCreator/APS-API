@@ -14,30 +14,32 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const user = this.userRepository.create(createUserDto);
-    return await this.userRepository.save(user);
+    return await this.userRepository.save(createUserDto);
   }
 
-  async findAll(): Promise<User[]> {
-    return await this.userRepository.find();
+  async finOneByEmail(email: string): Promise<User | null> {
+    return await this.userRepository.findOneBy({ email: email });
   }
 
-  async findOne(id: string): Promise<User | null> {
-    return this.userRepository.findOneBy({ id });
-  }
+  // async findAll(): Promise<User[]> {
+  //   return await this.userRepository.find();
+  // }
+
+  // async findOne(id: string): Promise<User | null> {
+  //   return this.userRepository.findOneBy({ id });
+  // }
 
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
     return this.userRepository.save({ id: id, ...updateUserDto });
   }
 
-  async remove(id: string): Promise<User> {
-    const user = await this.findOne(id);
+  async remove(email: string): Promise<User> {
+    const user = await this.finOneByEmail(email);
 
     if (!user) {
       throw new NotFoundException(`User does not exist!`);
     }
 
-    await this.userRepository.delete(id);
-    return user;
+    return await this.userRepository.remove(user);
   }
 }

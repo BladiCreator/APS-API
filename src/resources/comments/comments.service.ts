@@ -14,8 +14,7 @@ export class CommentsService {
   ) {}
 
   async create(createCommentDto: CreateCommentDto): Promise<Comment> {
-    const comment = this.commentRepository.create(createCommentDto);
-    return await this.commentRepository.save(comment);
+    return await this.commentRepository.save(createCommentDto);
   }
 
   async findAll(): Promise<Comment[]> {
@@ -40,7 +39,6 @@ export class CommentsService {
       throw new NotFoundException(`Comment does not exist!`);
     }
 
-    await this.commentRepository.delete(id);
-    return comment;
+    return await this.commentRepository.remove(comment);
   }
 }

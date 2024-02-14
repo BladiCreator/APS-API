@@ -12,28 +12,46 @@ import { Application } from "@src/resources/applications/entities/application.en
 import { Comment } from "@src/resources/comments/entities/comment.entity";
 import { Company } from "@src/resources/companies/entities/company.entity";
 
+export enum UserRole {
+  User = "user",
+  Developer = "developer",
+  Admin = "admin",
+}
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn("uuid")
   id: string = uuidv4(); // uuid
 
-  @Column("varchar")
-  email: string = ""; // VARCHAR(255) NOT NULL,
-  @Column("varchar")
+  @Column("varchar", { length: 36, nullable: false })
+  name: string = "";
+
+  @Column("varchar", { length: 36, nullable: true })
+  last_name?: string;
+
+  @Column("varchar", { unique: true, nullable: false })
+  email: string = ""; // VARCHAR(255) NOT NULL Unique,
+
+  @Column("varchar", { nullable: false })
   password: string = ""; // VARCHAR(255) NOT NULL, (Encriptable)
 
-  @Column("varchar")
+  @Column("varchar", { nullable: true })
   image_url?: string; //Investigate about this
 
   // TODO: Role system
-  // role: string[]; //only user and developer default: "user"
+  @Column({
+    type: "set",
+    enum: UserRole,
+    default: [UserRole.User],
+  })
+  roles!: UserRole[]; //only user and developer default: "user"
 
   @OneToMany(() => Comment, comment => comment.user)
   comments!: Comment[];
 
   @ManyToMany(() => Company)
   @JoinTable()
-  company!: Company[];
+  companies!: Company[];
 
   @ManyToMany(() => Application)
   @JoinTable()

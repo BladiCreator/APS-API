@@ -14,8 +14,7 @@ export class CategoriesService {
   ) {}
 
   async create(createCategoryDto: CreateCategoryDto) {
-    const category = this.categoryRepository.create(createCategoryDto);
-    return await this.categoryRepository.save(category);
+    return await this.categoryRepository.save(createCategoryDto);
   }
 
   async findAll(): Promise<Category[]> {
@@ -40,7 +39,6 @@ export class CategoriesService {
       throw new NotFoundException(`Category does not exist!`);
     }
 
-    await this.categoryRepository.delete(id);
-    return category;
+    return await this.categoryRepository.remove(category);
   }
 }

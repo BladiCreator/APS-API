@@ -14,8 +14,7 @@ export class ApplicationsService {
   ) {}
 
   async create(createApplicationDto: CreateApplicationDto) {
-    const application = this.applicationRepository.create(createApplicationDto);
-    return await this.applicationRepository.save(application);
+    return await this.applicationRepository.save(createApplicationDto);
   }
 
   async findAll(): Promise<Application[]> {
@@ -43,7 +42,6 @@ export class ApplicationsService {
       throw new NotFoundException(`Application does not exist!`);
     }
 
-    await this.applicationRepository.delete(id);
-    return application;
+    return await this.applicationRepository.remove(application);
   }
 }

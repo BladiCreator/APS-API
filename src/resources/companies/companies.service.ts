@@ -14,8 +14,7 @@ export class CompaniesService {
   ) {}
 
   async create(createCompanyDto: CreateCompanyDto): Promise<Company> {
-    const company = this.companyRepository.create(createCompanyDto);
-    return this.companyRepository.save(company);
+    return this.companyRepository.save(createCompanyDto);
   }
 
   async findAll(): Promise<Company[]> {
@@ -43,7 +42,6 @@ export class CompaniesService {
       throw new NotFoundException(`Company does not exist!`);
     }
 
-    await this.companyRepository.delete(id);
-    return company;
+    return await this.companyRepository.remove(company);
   }
 }
