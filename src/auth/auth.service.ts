@@ -9,6 +9,7 @@ import * as bcrypt from "bcrypt";
 import { UsersService } from "../resources/users/users.service";
 import { UserLoginDto } from "./dto/user-login.dto";
 import { UserRegisterDto } from "./dto/user-register.dto";
+import { UserJWT } from "./interfaces/user-jwt.interface";
 
 @Injectable()
 export class AuthService {
@@ -37,12 +38,12 @@ export class AuthService {
     return await this.usersService.create(userRegisterDto);
   }
 
-  async login(userLoginDto: UserLoginDto) {
+  async login(userLoginDto: UserLoginDto): Promise<UserJWT> {
     const user = await this.usersService.finOneByEmail(userLoginDto.email);
 
     //Si no existe lanza una error
     if (!user) {
-      throw new UnauthorizedException("Email does not exist!");
+      throw new UnauthorizedException(); //"Email does not exist!"
     }
 
     const isPasswordValid = await bcrypt.compare(
@@ -51,7 +52,7 @@ export class AuthService {
     );
 
     if (!isPasswordValid) {
-      throw new UnauthorizedException("Password is wrong!");
+      throw new UnauthorizedException(); //"Password is wrong!"
     }
 
     const payload = {
@@ -61,7 +62,7 @@ export class AuthService {
     const token = await this.jwtService.signAsync(payload);
 
     return {
-      token,
+      token: token,
       email: user.email,
     };
   }
