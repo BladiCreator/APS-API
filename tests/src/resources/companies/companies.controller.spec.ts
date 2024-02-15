@@ -4,18 +4,18 @@ import { CompaniesController } from "../../../../src/resources/companies/compani
 import { CompaniesService } from "../../../../src/resources/companies/companies.service";
 
 describe("CompaniesController", () => {
-  let controller: CompaniesController;
+	let controller: CompaniesController;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [CompaniesController],
-      providers: [CompaniesService],
-    }).compile();
+	beforeEach(async () => {
+		const module: TestingModule = await Test.createTestingModule({
+			controllers: [CompaniesController],
+			providers: [CompaniesService],
+		}).compile();
 
-    controller = module.get<CompaniesController>(CompaniesController);
-  });
+		controller = module.get<CompaniesController>(CompaniesController);
+	});
 
-  it("should be defined", () => {
-    expect(controller).toBeDefined();
-  });
+	it("should be defined", () => {
+		expect(controller).toBeDefined();
+	});
 });

@@ -1,9 +1,9 @@
 import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn,
+	Column,
+	Entity,
+	JoinTable,
+	ManyToMany,
+	PrimaryGeneratedColumn,
 } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 
@@ -11,13 +11,13 @@ import { Application } from "@src/resources/applications/entities/application.en
 
 @Entity()
 export class Company {
-  @PrimaryGeneratedColumn("uuid")
-  id: string = uuidv4(); // uuid
+	@PrimaryGeneratedColumn("uuid")
+	id: string = uuidv4(); // uuid
 
-  @Column("varchar", { length: 50 })
-  name: string = ""; //VARCHAR(50) i've to investigate
+	@Column("varchar", { length: 50 })
+	name = ""; //VARCHAR(50) i've to investigate
 
-  @ManyToMany(() => Application)
-  @JoinTable()
-  applications!: Application[];
+	@ManyToMany(() => Application)
+	@JoinTable()
+	applications!: Application[];
 }

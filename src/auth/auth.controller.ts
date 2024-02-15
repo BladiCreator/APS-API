@@ -1,11 +1,11 @@
 import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  Post,
-  Request,
-  UseGuards,
+	Body,
+	Controller,
+	Get,
+	HttpCode,
+	Post,
+	Request,
+	UseGuards,
 } from "@nestjs/common";
 
 import { AuthGuard } from "./auth.guard";
@@ -16,22 +16,22 @@ import { UserRequest } from "./interfaces/user-request.interface";
 
 @Controller("auth")
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+	constructor(private readonly authService: AuthService) {}
 
-  @Post("register")
-  register(@Body() userRegisterDto: UserRegisterDto) {
-    return this.authService.register(userRegisterDto);
-  }
+	@Post("register")
+	register(@Body() userRegisterDto: UserRegisterDto) {
+		return this.authService.register(userRegisterDto);
+	}
 
-  @Post("login")
-  @HttpCode(200)
-  login(@Body() userLoginDto: UserLoginDto) {
-    return this.authService.login(userLoginDto);
-  }
+	@Post("login")
+	@HttpCode(200)
+	login(@Body() userLoginDto: UserLoginDto) {
+		return this.authService.login(userLoginDto);
+	}
 
-  @Get("user")
-  @UseGuards(AuthGuard)
-  user(@Request() req: UserRequest) {
-    return req.user;
-  }
+	@Get("user")
+	@UseGuards(AuthGuard)
+	user(@Request() req: UserRequest) {
+		return req.user;
+	}
 }

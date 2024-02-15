@@ -1,5 +1,5 @@
 export const jwtConstants = {
-  secret: "Something that will never happen", //Production
+	secret: "Something that will never happen", //Production
 };
 //TODO: pasarlo a variable de entorno la frase o tomar medidas de seguridad adecuadas
 /* 

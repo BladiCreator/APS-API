@@ -4,12 +4,15 @@ import { Application } from "../../applications/entities/application.entity";
 
 @Entity()
 export class Category {
-  @PrimaryGeneratedColumn()
-  id: number = 0;
+	@PrimaryGeneratedColumn()
+	id = 0;
 
-  @Column("varchar", { length: 21 })
-  name: string = "";
+	@Column("varchar", { length: 21 })
+	name = "";
 
-  @ManyToOne(() => Application, application => application.categories)
-  application: Application = new Application();
+	@ManyToOne(
+		() => Application,
+		(application) => application.categories,
+	)
+	application: Application = new Application();
 }

@@ -6,27 +6,33 @@ import { Comment } from "@src/resources/comments/entities/comment.entity";
 
 @Entity()
 export class Application {
-  @PrimaryGeneratedColumn("uuid")
-  id: string = uuidv4(); //uuid
+	@PrimaryGeneratedColumn("uuid")
+	id: string = uuidv4(); //uuid
 
-  @Column("varchar", { length: 89 })
-  name: string = ""; //VARCHAR(89)
+	@Column("varchar", { length: 89 })
+	name = ""; //VARCHAR(89)
 
-  @Column("float", { precision: 6, scale: 2, unsigned: true })
-  price: number = 0; //Float(6,2) if is 0 is free
+	@Column("float", { precision: 6, scale: 2, unsigned: true })
+	price = 0; //Float(6,2) if is 0 is free
 
-  @Column("int", { unsigned: true })
-  downloads: number = 0; // Unsigned INT
+	@Column("int", { unsigned: true })
+	downloads = 0; // Unsigned INT
 
-  @Column("varchar", { length: 9 })
-  spaces: string = ""; //varchar(9)
+	@Column("varchar", { length: 9 })
+	spaces = ""; //varchar(9)
 
-  @Column("date")
-  publication_date: Date = new Date();
+	@Column("date")
+	publication_date: Date = new Date();
 
-  @OneToMany(() => Comment, (comment: Comment) => comment.application)
-  comments!: Comment[];
+	@OneToMany(
+		() => Comment,
+		(comment: Comment) => comment.application,
+	)
+	comments!: Comment[];
 
-  @OneToMany(() => Category, categories => categories.application)
-  categories!: Category[];
+	@OneToMany(
+		() => Category,
+		(categories) => categories.application,
+	)
+	categories!: Category[];
 }

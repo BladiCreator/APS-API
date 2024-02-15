@@ -7,21 +7,24 @@ import { Application } from "../../applications/entities/application.entity";
 
 @Entity()
 export class Comment {
-  @PrimaryGeneratedColumn("uuid")
-  id: string = uuidv4();
+	@PrimaryGeneratedColumn("uuid")
+	id: string = uuidv4();
 
-  @Column("text")
-  text: string = "";
+	@Column("text")
+	text = "";
 
-  @Column("date")
-  publication_date: Date = new Date();
+	@Column("date")
+	publication_date: Date = new Date();
 
-  @ManyToOne(() => User, (user: User) => user.comments)
-  user: User = new User();
+	@ManyToOne(
+		() => User,
+		(user: User) => user.comments,
+	)
+	user: User = new User();
 
-  @ManyToOne(
-    () => Application,
-    (application: Application) => application.comments,
-  )
-  application: Application = new Application();
+	@ManyToOne(
+		() => Application,
+		(application: Application) => application.comments,
+	)
+	application: Application = new Application();
 }

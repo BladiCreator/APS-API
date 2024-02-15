@@ -8,37 +8,37 @@ import { Category } from "./entities/category.entity";
 
 @Injectable()
 export class CategoriesService {
-  constructor(
-    @InjectRepository(Category)
-    private readonly categoryRepository: Repository<Category>,
-  ) {}
+	constructor(
+		@InjectRepository(Category)
+		private readonly categoryRepository: Repository<Category>,
+	) {}
 
-  async create(createCategoryDto: CreateCategoryDto) {
-    return await this.categoryRepository.save(createCategoryDto);
-  }
+	async create(createCategoryDto: CreateCategoryDto) {
+		return await this.categoryRepository.save(createCategoryDto);
+	}
 
-  async findAll(): Promise<Category[]> {
-    return await this.categoryRepository.find();
-  }
+	async findAll(): Promise<Category[]> {
+		return await this.categoryRepository.find();
+	}
 
-  async findOne(id: number): Promise<Category | null> {
-    return await this.categoryRepository.findOneBy({ id });
-  }
+	async findOne(id: number): Promise<Category | null> {
+		return await this.categoryRepository.findOneBy({ id });
+	}
 
-  async update(
-    id: number,
-    updateCategoryDto: UpdateCategoryDto,
-  ): Promise<Category> {
-    return await this.categoryRepository.save({ id: id, ...updateCategoryDto });
-  }
+	async update(
+		id: number,
+		updateCategoryDto: UpdateCategoryDto,
+	): Promise<Category> {
+		return await this.categoryRepository.save({ id: id, ...updateCategoryDto });
+	}
 
-  async remove(id: number): Promise<Category> {
-    const category = await this.findOne(id);
+	async remove(id: number): Promise<Category> {
+		const category = await this.findOne(id);
 
-    if (!category) {
-      throw new NotFoundException(`Category does not exist!`);
-    }
+		if (!category) {
+			throw new NotFoundException("Category does not exist!");
+		}
 
-    return await this.categoryRepository.remove(category);
-  }
+		return await this.categoryRepository.remove(category);
+	}
 }

@@ -8,40 +8,40 @@ import { Company } from "./entities/company.entity";
 
 @Injectable()
 export class CompaniesService {
-  constructor(
-    @InjectRepository(Company)
-    private readonly companyRepository: Repository<Company>,
-  ) {}
+	constructor(
+		@InjectRepository(Company)
+		private readonly companyRepository: Repository<Company>,
+	) {}
 
-  async create(createCompanyDto: CreateCompanyDto): Promise<Company> {
-    return this.companyRepository.save(createCompanyDto);
-  }
+	async create(createCompanyDto: CreateCompanyDto): Promise<Company> {
+		return await this.companyRepository.save(createCompanyDto);
+	}
 
-  async findAll(): Promise<Company[]> {
-    return this.companyRepository.find();
-  }
+	async findAll(): Promise<Company[]> {
+		return await this.companyRepository.find();
+	}
 
-  async findOne(id: string): Promise<Company | null> {
-    return this.companyRepository.findOneBy({ id });
-  }
+	async findOne(id: string): Promise<Company | null> {
+		return await this.companyRepository.findOneBy({ id });
+	}
 
-  async update(
-    id: string,
-    updateCompanyDto: UpdateCompanyDto,
-  ): Promise<Company> {
-    return this.companyRepository.save({
-      id: id,
-      updateCompanyDto: updateCompanyDto,
-    });
-  }
+	async update(
+		id: string,
+		updateCompanyDto: UpdateCompanyDto,
+	): Promise<Company> {
+		return await this.companyRepository.save({
+			id: id,
+			updateCompanyDto: updateCompanyDto,
+		});
+	}
 
-  async remove(id: string) {
-    const company = await this.findOne(id);
+	async remove(id: string) {
+		const company = await this.findOne(id);
 
-    if (!company) {
-      throw new NotFoundException(`Company does not exist!`);
-    }
+		if (!company) {
+			throw new NotFoundException("Company does not exist!");
+		}
 
-    return await this.companyRepository.remove(company);
-  }
+		return await this.companyRepository.remove(company);
+	}
 }
