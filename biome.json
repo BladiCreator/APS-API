@@ -59,6 +59,16 @@
 		}
 	},
 	"files": {
-		"ignoreUnknown": true
+		"ignoreUnknown": true,
+		"ignore": [
+			"**/node_modules/**",
+			"**/dist/**",
+			"**/build/**"
+		],
+		"include": [
+			"**/*.ts",
+			"**/*.js",
+			"**/*.json"
+		]
 	}
 }
