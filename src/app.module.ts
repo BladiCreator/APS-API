@@ -19,8 +19,6 @@ import { UsersModule } from "./resources/users/users.module";
 			isGlobal: true,
 			cache: true,
 		}),
-		LoggerModule,
-		HealthModule,
 		TypeOrmModule.forRootAsync({
 			imports: [ConfigModule],
 			inject: [ConfigService],
@@ -40,6 +38,8 @@ import { UsersModule } from "./resources/users/users.module";
 				return dataSource;
 			},
 		}),
+		LoggerModule,
+		HealthModule,
 		ApplicationsModule,
 		UsersModule,
 		CompaniesModule,

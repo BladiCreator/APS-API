@@ -1,5 +1,4 @@
 import {
-	IsInt,
 	IsNotEmpty,
 	IsNumber,
 	IsPositive,
@@ -17,11 +16,6 @@ export class CreateApplicationDto {
 	@IsNotEmpty()
 	@IsPositive()
 	price = 0;
-
-	@IsInt()
-	@IsNotEmpty()
-	@IsPositive()
-	downloads = 0;
 
 	@IsString()
 	@IsNotEmpty()

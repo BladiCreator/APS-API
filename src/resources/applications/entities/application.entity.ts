@@ -15,13 +15,16 @@ export class Application {
 	@Column("float", { precision: 6, scale: 2, unsigned: true })
 	price = 0; //Float(6,2) if is 0 is free
 
-	@Column("int", { unsigned: true })
+	@Column("int", { unsigned: true, default: 0 })
 	downloads = 0; // Unsigned INT
 
 	@Column("varchar", { length: 9 })
 	spaces = ""; //varchar(9)
 
-	@Column("date")
+	@Column("timestamp", {
+		nullable: false,
+		default: () => "CURRENT_TIMESTAMP",
+	})
 	publication_date: Date = new Date();
 
 	@OneToMany(

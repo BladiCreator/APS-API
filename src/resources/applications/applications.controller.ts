@@ -10,7 +10,10 @@ import {
 	UseGuards,
 } from "@nestjs/common";
 
-import { AuthGuard } from "@src/auth/auth.guard";
+import { UserRoles } from "@src/auth/decorators/roles.decorator";
+import { AuthGuard } from "@src/auth/guards/auth.guard";
+import { RolesGuard } from "@src/auth/guards/roles.guard";
+import { UserRole } from "@src/enums/user-roles.enum";
 import { ApplicationsService } from "./applications.service";
 import { CreateApplicationDto } from "./dto/create-application.dto";
 import { UpdateApplicationDto } from "./dto/update-application.dto";
@@ -21,7 +24,8 @@ export class ApplicationsController {
 
 	@Post()
 	@HttpCode(201)
-	@UseGuards(AuthGuard)
+	@UserRoles(UserRole.Developer)
+	@UseGuards(AuthGuard, RolesGuard)
 	create(@Body() createApplicationDto: CreateApplicationDto) {
 		return this.applicationsService.create(createApplicationDto);
 	}
@@ -37,7 +41,8 @@ export class ApplicationsController {
 	}
 
 	@Patch(":id")
-	@UseGuards(AuthGuard)
+	@UserRoles(UserRole.Developer)
+	@UseGuards(AuthGuard, RolesGuard)
 	update(
 		@Param("id") id: string,
 		@Body() updateApplicationDto: UpdateApplicationDto,
@@ -46,7 +51,8 @@ export class ApplicationsController {
 	}
 
 	@Delete(":id")
-	@UseGuards(AuthGuard)
+	@UserRoles(UserRole.Developer)
+	@UseGuards(AuthGuard, RolesGuard)
 	remove(@Param("id") id: string) {
 		return this.applicationsService.remove(id);
 	}

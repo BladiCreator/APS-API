@@ -13,7 +13,10 @@ export class Comment {
 	@Column("text")
 	text = "";
 
-	@Column("date")
+	@Column("timestamp", {
+		nullable: false,
+		default: () => "CURRENT_TIMESTAMP",
+	})
 	publication_date: Date = new Date();
 
 	@ManyToOne(

@@ -8,15 +8,10 @@ import {
 } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 
+import { UserRole } from "@src/enums/user-roles.enum";
 import { Application } from "@src/resources/applications/entities/application.entity";
 import { Comment } from "@src/resources/comments/entities/comment.entity";
 import { Company } from "@src/resources/companies/entities/company.entity";
-
-export enum UserRole {
-	User = "user",
-	Developer = "developer",
-	Admin = "admin",
-}
 
 @Entity()
 export class User {
@@ -33,7 +28,7 @@ export class User {
 	email = ""; // VARCHAR(255) NOT NULL Unique,
 
 	@Column("varchar", { nullable: false })
-	password = ""; // VARCHAR(255) NOT NULL, (Encriptable)
+	password = ""; // VARCHAR(255) NOT NULL, (Encriptado)
 
 	@Column("varchar", { nullable: true })
 	image_url?: string; //Investigate about this

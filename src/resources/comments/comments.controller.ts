@@ -9,17 +9,22 @@ import {
 	UseGuards,
 } from "@nestjs/common";
 
+import { UserRoles } from "@src/auth/decorators/roles.decorator";
+import { AuthGuard } from "@src/auth/guards/auth.guard";
+import { RolesGuard } from "@src/auth/guards/roles.guard";
+import { UserRole } from "@src/enums/user-roles.enum";
 import { CommentsService } from "./comments.service";
 import { CreateCommentDto } from "./dto/create-comment.dto";
 import { UpdateCommentDto } from "./dto/update-comment.dto";
-import { AuthGuard } from "@src/auth/auth.guard";
 
 @Controller("comments")
+@UserRoles(UserRole.User)
 export class CommentsController {
 	constructor(private readonly commentsService: CommentsService) {}
 
 	@Post()
-	@UseGuards(AuthGuard)
+	@UserRoles(UserRole.User)
+	@UseGuards(AuthGuard, RolesGuard)
 	create(@Body() createCommentDto: CreateCommentDto) {
 		return this.commentsService.create(createCommentDto);
 	}
@@ -35,13 +40,15 @@ export class CommentsController {
 	}
 
 	@Patch(":id")
-	@UseGuards(AuthGuard)
+	@UserRoles(UserRole.User)
+	@UseGuards(AuthGuard, RolesGuard)
 	update(@Param("id") id: string, @Body() updateCommentDto: UpdateCommentDto) {
 		return this.commentsService.update(id, updateCommentDto);
 	}
 
 	@Delete(":id")
-	@UseGuards(AuthGuard)
+	@UserRoles(UserRole.User)
+	@UseGuards(AuthGuard, RolesGuard)
 	remove(@Param("id") id: string) {
 		return this.commentsService.remove(id);
 	}
