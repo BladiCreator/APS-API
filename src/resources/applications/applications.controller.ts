@@ -7,11 +7,13 @@ import {
 	Param,
 	Patch,
 	Post,
+	UseGuards,
 } from "@nestjs/common";
 
 import { ApplicationsService } from "./applications.service";
 import { CreateApplicationDto } from "./dto/create-application.dto";
 import { UpdateApplicationDto } from "./dto/update-application.dto";
+import { AuthGuard } from "@src/auth/auth.guard";
 
 @Controller("applications")
 export class ApplicationsController {
@@ -19,6 +21,7 @@ export class ApplicationsController {
 
 	@Post()
 	@HttpCode(201)
+	@UseGuards(AuthGuard)
 	create(@Body() createApplicationDto: CreateApplicationDto) {
 		return this.applicationsService.create(createApplicationDto);
 	}
@@ -34,6 +37,7 @@ export class ApplicationsController {
 	}
 
 	@Patch(":id")
+	@UseGuards(AuthGuard)
 	update(
 		@Param("id") id: string,
 		@Body() updateApplicationDto: UpdateApplicationDto,
@@ -42,6 +46,7 @@ export class ApplicationsController {
 	}
 
 	@Delete(":id")
+	@UseGuards(AuthGuard)
 	remove(@Param("id") id: string) {
 		return this.applicationsService.remove(id);
 	}
