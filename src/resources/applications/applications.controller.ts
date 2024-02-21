@@ -10,10 +10,10 @@ import {
 	UseGuards,
 } from "@nestjs/common";
 
+import { AuthGuard } from "@src/auth/auth.guard";
 import { ApplicationsService } from "./applications.service";
 import { CreateApplicationDto } from "./dto/create-application.dto";
 import { UpdateApplicationDto } from "./dto/update-application.dto";
-import { AuthGuard } from "@src/auth/auth.guard";
 
 @Controller("applications")
 export class ApplicationsController {
