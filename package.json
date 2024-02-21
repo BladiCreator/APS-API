@@ -72,14 +72,8 @@
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
     "concurrently": "^8.2.2",
-    "eslint-plugin-jest": "^27.6.3",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-simple-import-sort": "^10.0.0",
-    "eslint-plugin-unicorn": "^50.0.1",
     "fs-extra": "^11.2.0",
-    "husky": "^9.0.10",
     "jest": "^29.7.0",
-    "lint-staged": "^15.2.1",
     "nock": "^13.5.1",
     "nyc": "^15.1.0",
     "rimraf": "^5.0.5",
@@ -91,15 +85,5 @@
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.3"
-  },
-  "lint-staged": {
-    "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
-      "biome check --files-ignore-unknown=true",
-      "biome check --apply --no-errors-on-unmatched",
-      "biome check --apply --organize-imports-enabled=false --no-errors-on-unmatched",
-      "biome check --apply-unsafe --no-errors-on-unmatched",
-      "biome format --write --no-errors-on-unmatched",
-      "biome lint --apply --no-errors-on-unmatched"
-    ]
   }
 }
