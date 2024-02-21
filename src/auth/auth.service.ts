@@ -20,7 +20,7 @@ export class AuthService {
 		private readonly jwtService: JwtService,
 	) {}
 
-	async register(userRegisterDto: UserRegisterDto) {
+	async register(userRegisterDto: UserRegisterDto): Promise<void> {
 		const user = await this.usersService.finOneByEmail(userRegisterDto.email);
 
 		//Si existe lanza una error
@@ -35,7 +35,7 @@ export class AuthService {
 
 		userRegisterDto.password = hashPassword;
 
-		return await this.usersService.create(userRegisterDto);
+		await this.usersService.create(userRegisterDto);
 	}
 
 	async login(userLoginDto: UserLoginDto): Promise<UserJWT> {
