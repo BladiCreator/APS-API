@@ -19,19 +19,22 @@ export class User {
 	id: string = uuidv4(); // uuid
 
 	@Column("varchar", { length: 36, nullable: false })
-	name = "";
+	user_name = "";
+
+	@Column("varchar", { unique: true, nullable: false })
+	email = "";
+
+	@Column("varchar", { nullable: false })
+	password = "";
+
+	@Column("varchar", { length: 36, nullable: false })
+	first_name = "";
 
 	@Column("varchar", { length: 36, nullable: true })
 	last_name?: string;
 
-	@Column("varchar", { unique: true, nullable: false })
-	email = ""; // VARCHAR(255) NOT NULL Unique,
-
-	@Column("varchar", { nullable: false })
-	password = ""; // VARCHAR(255) NOT NULL, (Encriptado)
-
 	@Column("varchar", { nullable: true })
-	image_url?: string; //Investigate about this
+	image_url?: string;
 
 	// TODO: Role system
 	@Column({

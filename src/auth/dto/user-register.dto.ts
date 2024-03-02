@@ -7,5 +7,5 @@ export class UserRegisterDto extends UserLoginDto {
 	@Transform(({ value }) => (value as string).trim())
 	@IsString()
 	@MinLength(3)
-	name!: string;
+	user_name!: string;
 }

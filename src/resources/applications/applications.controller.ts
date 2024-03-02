@@ -24,7 +24,7 @@ export class ApplicationsController {
 
 	@Post()
 	@HttpCode(201)
-	@UserRoles(UserRole.Developer)
+	@UserRoles(UserRole.Developer, UserRole.Admin)
 	@UseGuards(AuthGuard, RolesGuard)
 	create(@Body() createApplicationDto: CreateApplicationDto) {
 		return this.applicationsService.create(createApplicationDto);
@@ -41,7 +41,7 @@ export class ApplicationsController {
 	}
 
 	@Patch(":id")
-	@UserRoles(UserRole.Developer)
+	@UserRoles(UserRole.Developer, UserRole.Admin)
 	@UseGuards(AuthGuard, RolesGuard)
 	update(
 		@Param("id") id: string,
@@ -51,7 +51,7 @@ export class ApplicationsController {
 	}
 
 	@Delete(":id")
-	@UserRoles(UserRole.Developer)
+	@UserRoles(UserRole.Developer, UserRole.Admin)
 	@UseGuards(AuthGuard, RolesGuard)
 	remove(@Param("id") id: string) {
 		return this.applicationsService.remove(id);

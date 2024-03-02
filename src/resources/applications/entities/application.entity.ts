@@ -7,19 +7,33 @@ import { Comment } from "@src/resources/comments/entities/comment.entity";
 @Entity()
 export class Application {
 	@PrimaryGeneratedColumn("uuid")
-	id: string = uuidv4(); //uuid
+	id: string = uuidv4();
 
 	@Column("varchar", { length: 89 })
-	name = ""; //VARCHAR(89)
+	name = "";
+
+	@Column("text")
+	description = "";
 
 	@Column("float", { precision: 6, scale: 2, unsigned: true })
-	price = 0; //Float(6,2) if is 0 is free
+	price = 0;
+
+	@Column("decimal", { precision: 3, scale: 2, unsigned: true })
+	discount = 0;
 
 	@Column("int", { unsigned: true, default: 0 })
-	downloads = 0; // Unsigned INT
+	downloads = 0;
 
 	@Column("varchar", { length: 9 })
-	spaces = ""; //varchar(9)
+	spaces = "";
+
+	//!INVESTIGAR
+	@Column("varchar", { length: 2083 })
+	image_url = "";
+
+	@Column("varchar", { length: 600 })
+	image_alt = "";
+	//! ******/
 
 	@Column("timestamp", {
 		nullable: false,

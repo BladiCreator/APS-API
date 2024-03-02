@@ -5,6 +5,10 @@ import { UserRegisterDto } from "@src/auth/dto/user-register.dto";
 export class CreateUserDto extends UserRegisterDto {
 	@IsString()
 	@MinLength(3)
+	first_name?: string;
+
+	@IsString()
+	@MinLength(3)
 	last_name?: string;
 
 	@IsString()
