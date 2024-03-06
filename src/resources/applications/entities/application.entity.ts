@@ -1,4 +1,11 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+	Column,
+	CreateDateColumn,
+	Entity,
+	OneToMany,
+	PrimaryGeneratedColumn,
+	UpdateDateColumn,
+} from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 
 import { Category } from "@src/resources/categories/entities/category.entity";
@@ -12,13 +19,13 @@ export class Application {
 	@Column("varchar", { length: 89 })
 	name = "";
 
-	@Column("text")
+	@Column("varchar", { length: 500 })
 	description = "";
 
 	@Column("float", { precision: 6, scale: 2, unsigned: true })
 	price = 0;
 
-	@Column("decimal", { precision: 3, scale: 2, unsigned: true })
+	@Column("decimal", { precision: 3, scale: 2, unsigned: true, default: 0 })
 	discount = 0;
 
 	@Column("int", { unsigned: true, default: 0 })
@@ -27,19 +34,17 @@ export class Application {
 	@Column("varchar", { length: 9 })
 	spaces = "";
 
-	//!INVESTIGAR
-	@Column("varchar", { length: 2083 })
+	@Column("varchar", { length: 600, default: "" })
 	image_url = "";
 
-	@Column("varchar", { length: 600 })
+	@Column("varchar", { default: "" })
 	image_alt = "";
-	//! ******/
 
-	@Column("timestamp", {
-		nullable: false,
-		default: () => "CURRENT_TIMESTAMP",
-	})
+	@CreateDateColumn()
 	publication_date: Date = new Date();
+
+	@UpdateDateColumn()
+	update_date: Date = new Date();
 
 	@OneToMany(
 		() => Comment,

@@ -12,6 +12,11 @@ export class CreateApplicationDto {
 	@MaxLength(89)
 	name = "";
 
+	@IsString()
+	@IsNotEmpty()
+	@MaxLength(500)
+	description = "";
+
 	@IsNumber()
 	@IsNotEmpty()
 	@IsPositive()

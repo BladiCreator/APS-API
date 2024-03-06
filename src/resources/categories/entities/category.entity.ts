@@ -7,7 +7,7 @@ export class Category {
 	@PrimaryGeneratedColumn()
 	id = 0;
 
-	@Column("varchar", { length: 21 })
+	@Column("varchar", { length: 21, unique: true })
 	name = "";
 
 	@ManyToOne(

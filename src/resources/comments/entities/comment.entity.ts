@@ -1,4 +1,11 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+	Column,
+	CreateDateColumn,
+	Entity,
+	ManyToOne,
+	PrimaryGeneratedColumn,
+	UpdateDateColumn,
+} from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 
 import { User } from "@src/resources/users/entities/user.entity";
@@ -13,11 +20,11 @@ export class Comment {
 	@Column("text")
 	text = "";
 
-	@Column("timestamp", {
-		nullable: false,
-		default: () => "CURRENT_TIMESTAMP",
-	})
+	@CreateDateColumn()
 	publication_date: Date = new Date();
+
+	@UpdateDateColumn()
+	update_date: Date = new Date();
 
 	@ManyToOne(
 		() => User,
