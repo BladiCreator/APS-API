@@ -27,7 +27,7 @@ export class User {
 	@Column("varchar", { nullable: false })
 	password = "";
 
-	@Column("varchar", { length: 36, nullable: false })
+	@Column("varchar", { length: 36, nullable: true })
 	first_name = "";
 
 	@Column("varchar", { length: 36, nullable: true })
