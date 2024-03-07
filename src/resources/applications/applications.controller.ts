@@ -56,4 +56,9 @@ export class ApplicationsController {
 	remove(@Param("id") id: string) {
 		return this.applicationsService.remove(id);
 	}
+
+	//TODO: Get by min max price
+	//TODO: Get by name
+	//TODO: Get by has discount
+	//TODO: Get by categories
 }
