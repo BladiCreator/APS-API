@@ -2,6 +2,8 @@ import {
 	Column,
 	CreateDateColumn,
 	Entity,
+	JoinTable,
+	ManyToMany,
 	OneToMany,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
@@ -11,7 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Category } from "@src/resources/categories/entities/category.entity";
 import { Comment } from "@src/resources/comments/entities/comment.entity";
 
-@Entity()
+@Entity({ name: "applications" })
 export class Application {
 	@PrimaryGeneratedColumn("uuid")
 	id: string = uuidv4();
@@ -19,7 +21,7 @@ export class Application {
 	@Column("varchar", { length: 89 })
 	name = "";
 
-	@Column("varchar", { length: 500 })
+	@Column("text")
 	description = "";
 
 	@Column("float", { precision: 6, scale: 2, unsigned: true })
@@ -50,11 +52,13 @@ export class Application {
 		() => Comment,
 		(comment: Comment) => comment.application,
 	)
+	@JoinTable()
 	comments!: Comment[];
 
-	@OneToMany(
+	@ManyToMany(
 		() => Category,
-		(categories) => categories.application,
+		(categories) => categories.applications,
 	)
+	@JoinTable()
 	categories!: Category[];
 }

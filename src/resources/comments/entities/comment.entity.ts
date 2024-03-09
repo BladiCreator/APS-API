@@ -12,12 +12,12 @@ import { User } from "@src/resources/users/entities/user.entity";
 
 import { Application } from "../../applications/entities/application.entity";
 
-@Entity()
+@Entity({ name: "comments" })
 export class Comment {
 	@PrimaryGeneratedColumn("uuid")
 	id: string = uuidv4();
 
-	@Column("text")
+	@Column("varchar", { length: 500 })
 	text = "";
 
 	@CreateDateColumn()

@@ -7,16 +7,18 @@ import {
 	Param,
 	Patch,
 	Post,
+	Query,
 	UseGuards,
 } from "@nestjs/common";
 
 import { UserRoles } from "@src/auth/decorators/roles.decorator";
 import { AuthGuard } from "@src/auth/guards/auth.guard";
 import { RolesGuard } from "@src/auth/guards/roles.guard";
-import { UserRole } from "@src/enums/user-roles.enum";
+import { UserRole } from "@src/core/enums/user-roles.enum";
 import { ApplicationsService } from "./applications.service";
 import { CreateApplicationDto } from "./dto/create-application.dto";
 import { UpdateApplicationDto } from "./dto/update-application.dto";
+import { FindApplicationDto } from "./dto/find-application.dto";
 
 @Controller("applications")
 export class ApplicationsController {
@@ -31,7 +33,10 @@ export class ApplicationsController {
 	}
 
 	@Get()
-	findAll() {
+	findAll(@Query() findApplicationDto: FindApplicationDto) {
+		if (Object.keys(findApplicationDto).length > 0) {
+			return this.applicationsService.findByDto(findApplicationDto);
+		}
 		return this.applicationsService.findAll();
 	}
 

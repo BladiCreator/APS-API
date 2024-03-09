@@ -1,8 +1,8 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 import { Application } from "../../applications/entities/application.entity";
 
-@Entity()
+@Entity({name: "categories"})
 export class Category {
 	@PrimaryGeneratedColumn()
 	id = 0;
@@ -10,9 +10,9 @@ export class Category {
 	@Column("varchar", { length: 21, unique: true })
 	name = "";
 
-	@ManyToOne(
+	@ManyToMany(
 		() => Application,
-		(application) => application.categories,
+		(applications) => applications.categories,
 	)
-	application: Application = new Application();
+	applications!: Application[];
 }

@@ -8,12 +8,12 @@ import {
 } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 
-import { UserRole } from "@src/enums/user-roles.enum";
+import { UserRole } from "@src/core/enums/user-roles.enum";
 import { Application } from "@src/resources/applications/entities/application.entity";
 import { Comment } from "@src/resources/comments/entities/comment.entity";
 import { Company } from "@src/resources/companies/entities/company.entity";
 
-@Entity()
+@Entity({ name: "users" })
 export class User {
 	@PrimaryGeneratedColumn("uuid")
 	id: string = uuidv4(); // uuid

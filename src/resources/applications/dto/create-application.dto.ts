@@ -1,4 +1,6 @@
+import { Category } from "@src/resources/categories/entities/category.entity";
 import {
+	IsArray,
 	IsNotEmpty,
 	IsNumber,
 	IsPositive,
@@ -14,7 +16,7 @@ export class CreateApplicationDto {
 
 	@IsString()
 	@IsNotEmpty()
-	@MaxLength(500)
+	@MaxLength(1200)
 	description = "";
 
 	@IsNumber()
@@ -26,4 +28,8 @@ export class CreateApplicationDto {
 	@IsNotEmpty()
 	@MaxLength(9)
 	spaces = "";
+
+	@IsArray()
+	@IsNotEmpty()
+	categories: Category[] = [];
 }

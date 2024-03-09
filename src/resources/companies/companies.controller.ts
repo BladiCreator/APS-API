@@ -6,16 +6,18 @@ import {
 	Param,
 	Patch,
 	Post,
+	Query,
 	UseGuards,
 } from "@nestjs/common";
 
 import { UserRoles } from "@src/auth/decorators/roles.decorator";
 import { AuthGuard } from "@src/auth/guards/auth.guard";
 import { RolesGuard } from "@src/auth/guards/roles.guard";
-import { UserRole } from "@src/enums/user-roles.enum";
+import { UserRole } from "@src/core/enums/user-roles.enum";
 import { CompaniesService } from "./companies.service";
 import { CreateCompanyDto } from "./dto/create-company.dto";
 import { UpdateCompanyDto } from "./dto/update-company.dto";
+import { FindCompanyDto } from "./dto/find-company.dto";
 
 //! Solo puede hacer modificaciones el usuario con Developer
 @Controller("companies")
@@ -30,7 +32,10 @@ export class CompaniesController {
 	}
 
 	@Get()
-	findAll() {
+	findAll(@Query() findCompanyDto: FindCompanyDto) {
+		if(Object.keys(findCompanyDto).length > 0){
+			return this.companiesService.findByDto(findCompanyDto);
+		}
 		return this.companiesService.findAll();
 	}
 
