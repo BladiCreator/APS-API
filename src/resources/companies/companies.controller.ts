@@ -33,9 +33,6 @@ export class CompaniesController {
 
 	@Get()
 	findAll(@Query() findCompanyDto: FindCompanyDto) {
-		if(Object.keys(findCompanyDto).length > 0){
-			return this.companiesService.findByDto(findCompanyDto);
-		}
 		return this.companiesService.findAll();
 	}
 

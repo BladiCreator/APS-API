@@ -124,7 +124,11 @@ export class ApplicationsService {
 			},
 		});
 
-		if (findApplicationDto.same_categories && findApplicationDto.categories && findApplicationDto.categories.split(",").length > 1) {
+		if (
+			findApplicationDto.same_categories &&
+			findApplicationDto.categories &&
+			findApplicationDto.categories.split(",").length > 1
+		) {
 			return applications.filter((application) =>
 				areArraysEqual<string>(
 					application.categories.map((category) => category.name),
@@ -138,15 +142,23 @@ export class ApplicationsService {
 }
 
 function areArraysEqual<T>(arr1: T[], arr2: T[]): boolean {
-	if((arr1.length > 1 && arr2.length > 1) && arr1.every(item => arr2.includes(item))){
+	const arr1Length = arr1.length;
+	const arr2Length = arr2.length;
+	if (
+		arr1Length > 1 &&
+		arr2Length > 1 &&
+		// arr1Length > arr1Length - 2 &&
+		// arr2Length > arr1Length - 2 &&
+		arr1.every((item) => arr2.includes(item))
+	) {
 		return true;
 	}
-	
-	if (arr1.length !== arr2.length) {
+
+	if (arr1Length !== arr2Length) {
 		return false;
 	}
 
-	for (let i = 0; i < arr1.length; i++) {
+	for (let i = 0; i < arr1Length; i++) {
 		if (arr1[i] !== arr2[i]) {
 			return false;
 		}
