@@ -13,7 +13,6 @@ import { UserLoginDto } from "./dto/user-login.dto";
 import { UserRegisterDto } from "./dto/user-register.dto";
 import { AuthGuard } from "./guards/auth.guard";
 import { UserRequest } from "./interfaces/user-request.interface";
-
 @Controller("auth")
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}

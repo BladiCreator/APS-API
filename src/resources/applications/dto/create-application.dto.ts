@@ -12,24 +12,38 @@ export class CreateApplicationDto {
 	@IsString()
 	@IsNotEmpty()
 	@MaxLength(89)
-	name = "";
+	name: string;
 
 	@IsString()
 	@IsNotEmpty()
 	@MaxLength(1200)
-	description = "";
+	description: string;
 
 	@IsNumber()
 	@IsNotEmpty()
 	@IsPositive()
-	price = 0;
+	price: number;
 
 	@IsString()
 	@IsNotEmpty()
 	@MaxLength(9)
-	spaces = "";
+	spaces: string;
 
 	@IsArray()
 	@IsNotEmpty()
-	categories: Category[] = [];
+	categories: Category[];
+
+	constructor(
+		name: string,
+		description: string,
+		price: number,
+		spaces: string,
+		categories: Category[],
+	) {
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.spaces = spaces;
+		this.categories = categories;
+	}
 }

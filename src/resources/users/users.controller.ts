@@ -15,6 +15,8 @@ import { UpdateUserDto } from "./dto/update-user.dto";
 import { UsersService } from "./users.service";
 
 @Controller("users")
+@UseGuards(AuthGuard, RolesGuard)
+@UserRoles(UserRole.Admin, UserRole.Developer, UserRole.User)
 export class UsersController {
 	constructor(private readonly usersService: UsersService) {}
 
@@ -29,15 +31,11 @@ export class UsersController {
 	// }
 
 	@Patch(":id")
-	@UseGuards(AuthGuard, RolesGuard)
-	@UserRoles(UserRole.Admin, UserRole.Developer, UserRole.User)
 	update(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
 		return this.usersService.update(id, updateUserDto);
 	}
 
 	@Delete(":id")
-	@UserRoles(UserRole.User)
-	@UseGuards(AuthGuard, RolesGuard)
 	remove(@Param("id") id: string) {
 		return this.usersService.remove(id);
 	}
