@@ -2,6 +2,7 @@ import {
 	Body,
 	Controller,
 	Delete,
+	Get,
 	Param,
 	Patch,
 	UseGuards,
@@ -29,7 +30,13 @@ export class UsersController {
 	// findOne(@Param("id") id: string) {
 	//   return this.usersService.findOne(id);
 	// }
-
+	
+	//Solo puede acceder a la información el usuario que ya se halla autorizado
+	@Get(":email")
+	findOne(@Param("email") email: string) {
+	  return this.usersService.finOneByEmail(email);
+	}
+	
 	@Patch(":id")
 	update(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
 		return this.usersService.update(id, updateUserDto);

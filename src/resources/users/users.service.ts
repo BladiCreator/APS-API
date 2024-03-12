@@ -17,6 +17,7 @@ export class UsersService {
 		return await this.userRepository.save(createUserDto);
 	}
 
+	//!No debe ser modificado
 	async finOneByEmail(email: string): Promise<User | null> {
 		return await this.userRepository.findOneBy({ email: email });
 	}
@@ -27,6 +28,27 @@ export class UsersService {
 
 	// async findOne(id: string): Promise<User | null> {
 	//   return this.userRepository.findOneBy({ id });
+	// }
+	
+	// async findOneById(id: string): Promise<User | null> {
+	//   return await this.userRepository.findOne({
+	// 		where: { id: id },
+	// 		select: {
+	// 			id: true,
+	// 			user_name: true,
+	// 			email: true,
+	// 			password: false,
+	// 			first_name: true,
+	// 			last_name: true,
+	// 			image_url: true,
+	// 			roles: true,
+	// 			comments: true,
+	// 			companies: true,
+	// 		},
+	// 		relations: {
+				
+	// 		}
+	// 	});
 	// }
 
 	async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
