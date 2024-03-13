@@ -6,7 +6,6 @@ import {
 	Param,
 	Patch,
 	Post,
-	Query,
 	UseGuards,
 } from "@nestjs/common";
 
@@ -17,9 +16,9 @@ import { UserRole } from "@src/core/enums/user-roles.enum";
 import { CompaniesService } from "./companies.service";
 import { CreateCompanyDto } from "./dto/create-company.dto";
 import { UpdateCompanyDto } from "./dto/update-company.dto";
-import { FindCompanyDto } from "./dto/find-company.dto";
+import { ApiBearerAuth, ApiBody, ApiTags } from "@nestjs/swagger";
 
-//! Solo puede hacer modificaciones el usuario con Developer
+@ApiTags("Companies")
 @Controller("companies")
 export class CompaniesController {
 	constructor(private readonly companiesService: CompaniesService) {}
@@ -27,12 +26,14 @@ export class CompaniesController {
 	@Post()
 	@UserRoles(UserRole.Developer)
 	@UseGuards(AuthGuard, RolesGuard)
+	@ApiBearerAuth()
+	@ApiBody({ type: CreateCompanyDto })
 	create(@Body() createCompanyDto: CreateCompanyDto) {
 		return this.companiesService.create(createCompanyDto);
 	}
 
 	@Get()
-	findAll(@Query() findCompanyDto: FindCompanyDto) {
+	findAll() {
 		return this.companiesService.findAll();
 	}
 
@@ -44,6 +45,7 @@ export class CompaniesController {
 	@Patch(":id")
 	@UserRoles(UserRole.Developer)
 	@UseGuards(AuthGuard, RolesGuard)
+	@ApiBearerAuth()
 	update(@Param("id") id: string, @Body() updateCompanyDto: UpdateCompanyDto) {
 		return this.companiesService.update(id, updateCompanyDto);
 	}
@@ -51,6 +53,7 @@ export class CompaniesController {
 	@Delete(":id")
 	@UserRoles(UserRole.Developer)
 	@UseGuards(AuthGuard, RolesGuard)
+	@ApiBearerAuth()
 	remove(@Param("id") id: string) {
 		return this.companiesService.remove(id);
 	}

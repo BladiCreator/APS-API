@@ -13,7 +13,9 @@ import { UserLoginDto } from "./dto/user-login.dto";
 import { UserRegisterDto } from "./dto/user-register.dto";
 import { AuthGuard } from "./guards/auth.guard";
 import { UserRequest } from "./interfaces/user-request.interface";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 @Controller("auth")
+@ApiTags("Auth")
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 
@@ -28,6 +30,7 @@ export class AuthController {
 		return this.authService.login(userLoginDto);
 	}
 
+	@ApiBearerAuth()
 	@Get("user")
 	@UseGuards(AuthGuard)
 	user(@Request() req: UserRequest) {

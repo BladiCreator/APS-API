@@ -15,8 +15,8 @@ import {
 import { CreateApplicationDto } from "./dto/create-application.dto";
 import { UpdateApplicationDto } from "./dto/update-application.dto";
 import { Application } from "./entities/application.entity";
-import { FindApplicationDto } from "./dto/find-application.dto";
 import { applicationMinimalSelect } from "@src/core/constants/minimal-select.constant";
+import { FindApplicationDto } from "./dto/find-application.dto";
 
 @Injectable()
 export class ApplicationsService {
@@ -46,7 +46,7 @@ export class ApplicationsService {
 			where: { id: id },
 			relations: {
 				categories: true,
-				comments: true,
+				feedbacks: true,
 			},
 		});
 	}
@@ -147,8 +147,8 @@ function areArraysEqual<T>(arr1: T[], arr2: T[]): boolean {
 	if (
 		arr1Length > 1 &&
 		arr2Length > 1 &&
-		// arr1Length > arr1Length - 2 &&
-		// arr2Length > arr1Length - 2 &&
+		arr1Length >= arr1Length - 2 &&
+		arr2Length >= arr2Length - 2 &&
 		arr1.every((item) => arr2.includes(item))
 	) {
 		return true;

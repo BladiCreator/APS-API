@@ -1,9 +1,12 @@
 import { Transform } from "class-transformer";
-import { IsString, MinLength } from "class-validator";
+import { IsNotEmpty, IsString, MinLength } from "class-validator";
 
 import { UserLoginDto } from "./user-login.dto";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class UserRegisterDto extends UserLoginDto {
+	@ApiProperty({ type: String , minLength: 3})
+	@IsNotEmpty()
 	@Transform(({ value }) => (value as string).trim())
 	@IsString()
 	@MinLength(3)

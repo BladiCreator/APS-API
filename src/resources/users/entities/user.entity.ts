@@ -10,33 +10,41 @@ import { v4 as uuidv4 } from "uuid";
 
 import { UserRole } from "@src/core/enums/user-roles.enum";
 import { Application } from "@src/resources/applications/entities/application.entity";
-import { Comment } from "@src/resources/comments/entities/comment.entity";
 import { Company } from "@src/resources/companies/entities/company.entity";
+import { ApiProperty } from "@nestjs/swagger";
+import { Feedback } from "@src/resources/feedbacks/entities/feedback.entity";
 
 @Entity({ name: "users" })
 export class User {
+	@ApiProperty()
 	@PrimaryGeneratedColumn("uuid")
 	id: string = uuidv4(); // uuid
 
+	@ApiProperty({ type: String })
 	@Column("varchar", { length: 36, nullable: false })
 	user_name = "";
 
+	@ApiProperty({ type: String })
 	@Column("varchar", { unique: true, nullable: false })
 	email = "";
 
+	@ApiProperty({ type: String })
 	@Column("varchar", { nullable: false })
 	password = "";
 
+	@ApiProperty({ type: String })
 	@Column("varchar", { length: 36, nullable: true })
 	first_name = "";
 
+	@ApiProperty({ type: String })
 	@Column("varchar", { length: 36, nullable: true })
 	last_name?: string;
 
+	@ApiProperty({ type: String })
 	@Column("varchar", { nullable: true })
 	image_url?: string;
 
-	// TODO: Role system
+	@ApiProperty({ type: [UserRole], enum: UserRole })
 	@Column({
 		type: "set",
 		enum: UserRole,
@@ -44,16 +52,22 @@ export class User {
 	})
 	roles!: UserRole[]; //only user and developer default: "user"
 
+	@ApiProperty({ type: () => [Feedback] })
 	@OneToMany(
-		() => Comment,
-		(comment) => comment.user,
+		() => Feedback,
+		(feedbacks) => feedbacks.user,
 	)
-	comments!: Comment[];
+	feedbacks!: Feedback[];
 
-	@ManyToMany(() => Company)
+	@ApiProperty({ type: [Company] })
+	@ManyToMany(
+		() => Company,
+		(companies) => companies.users,
+	)
 	@JoinTable()
 	companies!: Company[];
 
+	@ApiProperty({ type: [Application] })
 	@ManyToMany(() => Application)
 	@JoinTable()
 	applications!: Application[];

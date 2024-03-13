@@ -30,27 +30,6 @@ export class UsersService {
 	//   return this.userRepository.findOneBy({ id });
 	// }
 	
-	// async findOneById(id: string): Promise<User | null> {
-	//   return await this.userRepository.findOne({
-	// 		where: { id: id },
-	// 		select: {
-	// 			id: true,
-	// 			user_name: true,
-	// 			email: true,
-	// 			password: false,
-	// 			first_name: true,
-	// 			last_name: true,
-	// 			image_url: true,
-	// 			roles: true,
-	// 			comments: true,
-	// 			companies: true,
-	// 		},
-	// 		relations: {
-				
-	// 		}
-	// 	});
-	// }
-
 	async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
 		return await this.userRepository.save({ id: id, ...updateUserDto });
 	}
