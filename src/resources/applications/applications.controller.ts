@@ -13,15 +13,15 @@ import {
 	UseGuards,
 } from "@nestjs/common";
 
+import { ApiBearerAuth, ApiBody, ApiTags } from "@nestjs/swagger";
 import { UserRoles } from "@src/auth/decorators/roles.decorator";
 import { AuthGuard } from "@src/auth/guards/auth.guard";
 import { RolesGuard } from "@src/auth/guards/roles.guard";
 import { UserRole } from "@src/core/enums/user-roles.enum";
 import { ApplicationsService } from "./applications.service";
 import { CreateApplicationDto } from "./dto/create-application.dto";
-import { UpdateApplicationDto } from "./dto/update-application.dto";
-import { ApiBearerAuth, ApiBody, ApiTags } from "@nestjs/swagger";
 import { FindApplicationDto } from "./dto/find-application.dto";
+import { UpdateApplicationDto } from "./dto/update-application.dto";
 
 @ApiTags("Applications")
 @Controller("applications")

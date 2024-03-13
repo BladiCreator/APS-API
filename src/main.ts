@@ -6,8 +6,8 @@ import {
 	NestFastifyApplication,
 } from "@nestjs/platform-fastify";
 
-import { AppModule } from "./app.module";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { AppModule } from "./app.module";
 
 async function bootstrap() {
 	const app = await NestFactory.create<NestFastifyApplication>(
@@ -27,13 +27,15 @@ async function bootstrap() {
 	);
 
 	const config = new DocumentBuilder()
-    .setTitle('APS API Documentation')
-    .setDescription('Application API for APS Web App to upload and download applications') 	
-    .setVersion('1.0')
+		.setTitle("APS API Documentation")
+		.setDescription(
+			"Application API for APS Web App to upload and download applications",
+		)
+		.setVersion("1.0")
 		.addBearerAuth()
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('docs', app, document);
+		.build();
+	const document = SwaggerModule.createDocument(app, config);
+	SwaggerModule.setup("docs", app, document);
 
 	const configService = app.get(ConfigService);
 	const port = configService.get<string>("PORT", "3000");

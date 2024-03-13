@@ -8,13 +8,13 @@ import {
 	UseGuards,
 } from "@nestjs/common";
 
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { UserRoles } from "@src/auth/decorators/roles.decorator";
 import { AuthGuard } from "@src/auth/guards/auth.guard";
 import { RolesGuard } from "@src/auth/guards/roles.guard";
 import { UserRole } from "@src/core/enums/user-roles.enum";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { UsersService } from "./users.service";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
 @ApiTags("Users")
 @ApiBearerAuth()
@@ -33,13 +33,13 @@ export class UsersController {
 	// findOne(@Param("id") id: string) {
 	//   return this.usersService.findOne(id);
 	// }
-	
+
 	//Solo puede acceder a la información el usuario que ya se halla autorizado
 	@Get(":email")
 	findOne(@Param("email") email: string) {
-	  return this.usersService.finOneByEmail(email);
+		return this.usersService.finOneByEmail(email);
 	}
-	
+
 	@Patch(":id")
 	update(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
 		return this.usersService.update(id, updateUserDto);

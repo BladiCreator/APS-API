@@ -12,11 +12,11 @@ import {
 	Repository,
 } from "typeorm";
 
+import { applicationMinimalSelect } from "@src/core/constants/minimal-select.constant";
 import { CreateApplicationDto } from "./dto/create-application.dto";
+import { FindApplicationDto } from "./dto/find-application.dto";
 import { UpdateApplicationDto } from "./dto/update-application.dto";
 import { Application } from "./entities/application.entity";
-import { applicationMinimalSelect } from "@src/core/constants/minimal-select.constant";
-import { FindApplicationDto } from "./dto/find-application.dto";
 
 @Injectable()
 export class ApplicationsService {

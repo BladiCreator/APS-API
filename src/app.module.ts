@@ -10,8 +10,8 @@ import { AuthModule } from "./auth/auth.module";
 import { ApplicationsModule } from "./resources/applications/applications.module";
 import { CategoriesModule } from "./resources/categories/categories.module";
 import { CompaniesModule } from "./resources/companies/companies.module";
+import { FeedbacksModule } from "./resources/feedbacks/feedbacks.module";
 import { UsersModule } from "./resources/users/users.module";
-import { FeedbacksModule } from './resources/feedbacks/feedbacks.module';
 
 @Module({
 	imports: [

@@ -10,10 +10,10 @@ import {
 } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 
-import { Category } from "@src/resources/categories/entities/category.entity";
 import { ApiProperty } from "@nestjs/swagger";
-import { User } from "@src/resources/users/entities/user.entity";
+import { Category } from "@src/resources/categories/entities/category.entity";
 import { Feedback } from "@src/resources/feedbacks/entities/feedback.entity";
+import { User } from "@src/resources/users/entities/user.entity";
 
 @Entity({ name: "applications" })
 export class Application {

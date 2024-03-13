@@ -7,9 +7,9 @@ import {
 } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 
+import { ApiProperty } from "@nestjs/swagger";
 import { Application } from "@src/resources/applications/entities/application.entity";
 import { User } from "@src/resources/users/entities/user.entity";
-import { ApiProperty } from "@nestjs/swagger";
 
 @Entity({ name: "companies" })
 export class Company {

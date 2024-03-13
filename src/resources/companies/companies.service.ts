@@ -2,10 +2,10 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { applicationMinimalSelect } from "@src/core/constants/minimal-select.constant";
 import { CreateCompanyDto } from "./dto/create-company.dto";
 import { UpdateCompanyDto } from "./dto/update-company.dto";
 import { Company } from "./entities/company.entity";
-import { applicationMinimalSelect } from "@src/core/constants/minimal-select.constant";
 
 @Injectable()
 export class CompaniesService {

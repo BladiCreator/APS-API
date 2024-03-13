@@ -15,7 +15,14 @@ export class CreateUserDto extends UserRegisterDto {
 	@IsUrl()
 	image_url?: string; //Investigate about this
 
-	constructor(email: string, password: string, user_name: string, first_name: string, last_name: string, image_url: string) {
+	constructor(
+		email: string,
+		password: string,
+		user_name: string,
+		first_name: string,
+		last_name: string,
+		image_url: string,
+	) {
 		super(email, password, user_name);
 		this.first_name = user_name;
 		this.last_name = user_name;

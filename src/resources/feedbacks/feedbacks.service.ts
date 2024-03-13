@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 import { CreateFeedbackDto } from "./dto/create-feedback.dto";
 import { UpdateFeedbackDto } from "./dto/update-feedback.dto";
-import { InjectRepository } from "@nestjs/typeorm";
 import { Feedback } from "./entities/feedback.entity";
-import { Repository } from "typeorm";
 
 @Injectable()
 export class FeedbacksService {
@@ -24,7 +24,10 @@ export class FeedbacksService {
 		return await this.feedbackRepository.findOneBy({ id });
 	}
 
-	async update(id: string, updateFeedbackDto: UpdateFeedbackDto): Promise<Feedback> {
+	async update(
+		id: string,
+		updateFeedbackDto: UpdateFeedbackDto,
+	): Promise<Feedback> {
 		return await this.feedbackRepository.save({ id: id, ...updateFeedbackDto });
 	}
 
