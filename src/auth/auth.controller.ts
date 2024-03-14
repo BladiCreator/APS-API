@@ -3,6 +3,8 @@ import {
 	Controller,
 	Get,
 	HttpCode,
+	Inject,
+	Logger,
 	Post,
 	Request,
 	UseGuards,
@@ -17,16 +19,21 @@ import { UserRequest } from "./interfaces/user-request.interface";
 @Controller("auth")
 @ApiTags("Auth")
 export class AuthController {
-	constructor(private readonly authService: AuthService) {}
+	constructor(
+		@Inject(Logger) private readonly logger: Logger,
+		private readonly authService: AuthService,
+	) {}
 
 	@Post("register")
 	register(@Body() userRegisterDto: UserRegisterDto) {
+		this.logger.log("Registering new user");
 		return this.authService.register(userRegisterDto);
 	}
-
+	
 	@Post("login")
 	@HttpCode(200)
 	login(@Body() userLoginDto: UserLoginDto) {
+		this.logger.log("Logging in user");
 		return this.authService.login(userLoginDto);
 	}
 
