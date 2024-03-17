@@ -29,7 +29,7 @@ export class AuthController {
 		this.logger.log("Registering new user");
 		return this.authService.register(userRegisterDto);
 	}
-	
+
 	@Post("login")
 	@HttpCode(200)
 	login(@Body() userLoginDto: UserLoginDto) {

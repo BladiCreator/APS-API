@@ -33,7 +33,7 @@ export class UsersService {
 			where: { email },
 			relations: {
 				companies: true,
-			}
+			},
 		});
 	}
 
