@@ -11,7 +11,7 @@ export class UserLoginDto {
 	@ApiProperty({ type: String })
 	@Transform(({ value }) => (value as string).trim())
 	@IsString()
-	@MinLength(6)
+	@MinLength(8)
 	@IsNotEmpty()
 	password: string;
 

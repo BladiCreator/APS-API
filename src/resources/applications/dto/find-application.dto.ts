@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { PEGIRating } from "@src/core/enums/pegi.enum";
 import { IOrderPagination } from "@src/core/interfaces/order-pagination.interface";
 import { ISearcher } from "@src/core/interfaces/searcher.interface";
 import { Transform } from "class-transformer";
@@ -56,6 +57,11 @@ export class FindApplicationDto implements IOrderPagination, ISearcher {
 	@IsOptional()
 	same_categories: boolean;
 
+	@ApiProperty({ enum: PEGIRating, required: false })
+	@IsString()
+	@IsOptional()
+	pegi_rating: PEGIRating;
+
 	constructor(
 		order: "ASC" | "DESC",
 		limit: number,
@@ -67,6 +73,7 @@ export class FindApplicationDto implements IOrderPagination, ISearcher {
 		discount: number,
 		categories: string,
 		same_categories: boolean,
+		PEGI_rating: PEGIRating,
 	) {
 		this.order = order;
 		this.limit = limit;
@@ -79,5 +86,6 @@ export class FindApplicationDto implements IOrderPagination, ISearcher {
 		this.discount = discount;
 		this.categories = categories;
 		this.same_categories = same_categories;
+		this.pegi_rating = PEGI_rating;
 	}
 }

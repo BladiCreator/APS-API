@@ -39,7 +39,9 @@ export class AuthService {
 	}
 
 	async login(userLoginDto: UserLoginDto): Promise<UserJWT> {
-		const user = await this.usersService.finOneByEmail(userLoginDto.email);
+		const user = await this.usersService.finOneByEmailToSignIn(
+			userLoginDto.email,
+		);
 
 		//Si no existe lanza una error
 		if (!user) {
@@ -57,7 +59,7 @@ export class AuthService {
 
 		const payload = {
 			email: user.email,
-			roles: user.roles,
+			role: user.role,
 		};
 
 		const token = await this.jwtService.signAsync(payload);
@@ -65,7 +67,7 @@ export class AuthService {
 		return {
 			token: token,
 			email: user.email,
-			roles: user.roles,
+			role: user.role,
 		};
 	}
 }

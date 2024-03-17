@@ -45,12 +45,11 @@ export class User {
 	image_url?: string;
 
 	@ApiProperty({ type: [UserRole], enum: UserRole })
-	@Column({
-		type: "set",
+	@Column("enum", {
 		enum: UserRole,
-		default: [UserRole.User],
+		default: UserRole.User,
 	})
-	roles!: UserRole[]; //only user and developer default: "user"
+	role!: UserRole; //only user and developer default: "user"
 
 	@ApiProperty({ type: () => [Feedback] })
 	@OneToMany(

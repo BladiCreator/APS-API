@@ -19,6 +19,25 @@ export class UsersService {
 
 	//!No debe ser modificado
 	async finOneByEmail(email: string): Promise<User | null> {
+		// return await this.userRepository.findOneBy({ email: email });
+		return await this.userRepository.findOne({
+			select: {
+				id: true,
+				user_name: true,
+				email: true,
+				first_name: true,
+				last_name: true,
+				image_url: true,
+				role: true,
+			},
+			where: { email },
+			relations: {
+				companies: true,
+			}
+		});
+	}
+
+	async finOneByEmailToSignIn(email: string): Promise<User | null> {
 		return await this.userRepository.findOneBy({ email: email });
 	}
 
