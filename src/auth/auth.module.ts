@@ -5,7 +5,7 @@ import { UsersModule } from "@src/resources/users/users.module";
 
 import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
-import { jwtConstants } from "./constants/jwt.constant";
+import { jwtConstants } from "../common/constants/jwt.constant";
 
 @Module({
 	controllers: [AuthController],

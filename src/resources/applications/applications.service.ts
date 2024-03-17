@@ -12,7 +12,7 @@ import {
 	Repository,
 } from "typeorm";
 
-import { applicationMinimalSelect } from "@src/core/constants/minimal-select.constant";
+import { applicationMinimalSelect } from "@src/common/constants/minimal-select.constant";
 import { CreateApplicationDto } from "./dto/create-application.dto";
 import { FindApplicationDto } from "./dto/find-application.dto";
 import { UpdateApplicationDto } from "./dto/update-application.dto";

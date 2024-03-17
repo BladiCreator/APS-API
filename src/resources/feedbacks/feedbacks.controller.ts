@@ -9,10 +9,10 @@ import {
 	UseGuards,
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
-import { UserRoles } from "@src/auth/decorators/roles.decorator";
-import { AuthGuard } from "@src/auth/guards/auth.guard";
-import { RolesGuard } from "@src/auth/guards/roles.guard";
-import { UserRole } from "@src/core/enums/user-roles.enum";
+import { UserRoles } from "@src/common/decorators/roles.decorator";
+import { AuthGuard } from "@src/common/guards/auth.guard";
+import { RolesGuard } from "@src/common/guards/roles.guard";
+import { UserRole } from "@src/common/enums/user-roles.enum";
 import { CreateFeedbackDto } from "./dto/create-feedback.dto";
 import { UpdateFeedbackDto } from "./dto/update-feedback.dto";
 import { FeedbacksService } from "./feedbacks.service";

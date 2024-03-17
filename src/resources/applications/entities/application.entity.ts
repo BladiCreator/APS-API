@@ -14,7 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Category } from "@src/resources/categories/entities/category.entity";
 import { Feedback } from "@src/resources/feedbacks/entities/feedback.entity";
 import { User } from "@src/resources/users/entities/user.entity";
-import { PEGIRating } from "../../../core/enums/pegi.enum";
+import { PEGIRating } from "../../../common/enums/pegi.enum";
 
 @Entity({ name: "applications" })
 export class Application {

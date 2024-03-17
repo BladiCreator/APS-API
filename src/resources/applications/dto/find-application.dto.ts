@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { PEGIRating } from "@src/core/enums/pegi.enum";
-import { IOrderPagination } from "@src/core/interfaces/order-pagination.interface";
-import { ISearcher } from "@src/core/interfaces/searcher.interface";
+import { PEGIRating } from "@src/common/enums/pegi.enum";
+import { IOrderPagination } from "@src/common/interfaces/order-pagination.interface";
+import { ISearcher } from "@src/common/interfaces/searcher.interface";
 import { Transform } from "class-transformer";
 import { IsBoolean, IsNumber, IsOptional, IsString } from "class-validator";
 

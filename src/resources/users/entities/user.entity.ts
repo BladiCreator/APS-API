@@ -9,7 +9,7 @@ import {
 import { v4 as uuidv4 } from "uuid";
 
 import { ApiProperty } from "@nestjs/swagger";
-import { UserRole } from "@src/core/enums/user-roles.enum";
+import { UserRole } from "@src/common/enums/user-roles.enum";
 import { Application } from "@src/resources/applications/entities/application.entity";
 import { Company } from "@src/resources/companies/entities/company.entity";
 import { Feedback } from "@src/resources/feedbacks/entities/feedback.entity";

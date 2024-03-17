@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { PEGIRating } from "@src/core/enums/pegi.enum";
+import { PEGIRating } from "@src/common/enums/pegi.enum";
 import { Category } from "@src/resources/categories/entities/category.entity";
 import {
 	IsArray,
