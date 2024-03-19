@@ -16,7 +16,6 @@ export class CreateFeedbackDto {
 	@IsPositive()
 	@Min(1)
 	@Max(5)
-	@MaxLength(1)
 	rate: number;
 
 	@IsString()

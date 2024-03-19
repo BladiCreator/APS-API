@@ -10,9 +10,9 @@ import {
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { UserRoles } from "@src/common/decorators/roles.decorator";
+import { UserRole } from "@src/common/enums/user-roles.enum";
 import { AuthGuard } from "@src/common/guards/auth.guard";
 import { RolesGuard } from "@src/common/guards/roles.guard";
-import { UserRole } from "@src/common/enums/user-roles.enum";
 import { CreateFeedbackDto } from "./dto/create-feedback.dto";
 import { UpdateFeedbackDto } from "./dto/update-feedback.dto";
 import { FeedbacksService } from "./feedbacks.service";
@@ -24,7 +24,7 @@ export class FeedbacksController {
 
 	@ApiBearerAuth()
 	@Post()
-	@UserRoles(UserRole.User)
+	@UserRoles(UserRole.User, UserRole.Developer, UserRole.Admin)
 	@UseGuards(AuthGuard, RolesGuard)
 	create(@Body() createFeedbackDto: CreateFeedbackDto) {
 		return this.feedbacksService.create(createFeedbackDto);
@@ -42,7 +42,7 @@ export class FeedbacksController {
 
 	@ApiBearerAuth()
 	@Patch(":id")
-	@UserRoles(UserRole.User)
+	@UserRoles(UserRole.User, UserRole.Developer, UserRole.Admin)
 	@UseGuards(AuthGuard, RolesGuard)
 	update(
 		@Param("id") id: string,
@@ -53,7 +53,7 @@ export class FeedbacksController {
 
 	@ApiBearerAuth()
 	@Delete(":id")
-	@UserRoles(UserRole.User)
+	@UserRoles(UserRole.User, UserRole.Developer, UserRole.Admin)
 	@UseGuards(AuthGuard, RolesGuard)
 	remove(@Param("id") id: string) {
 		return this.feedbacksService.remove(id);
