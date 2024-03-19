@@ -84,7 +84,6 @@ export class Application {
 		() => Feedback,
 		(comment: Feedback) => comment.application,
 	)
-	@JoinTable()
 	feedbacks!: Feedback[];
 
 	@ApiProperty({ type: [User] })
