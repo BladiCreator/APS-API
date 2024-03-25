@@ -44,6 +44,9 @@ export class Feedback {
 	@ManyToOne(
 		() => Application,
 		(application: Application) => application.feedbacks,
+		{
+			onDelete: "CASCADE",
+		}
 	)
 	application: Application = new Application();
 }

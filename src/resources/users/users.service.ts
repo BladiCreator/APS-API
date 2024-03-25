@@ -27,12 +27,12 @@ export class UsersService {
 				email: true,
 				first_name: true,
 				last_name: true,
-				image_url: true,
 				role: true,
 			},
 			where: { email },
 			relations: {
 				companies: true,
+				media: true,
 			},
 		});
 	}

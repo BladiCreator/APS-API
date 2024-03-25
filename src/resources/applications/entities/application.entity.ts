@@ -15,6 +15,8 @@ import { Category } from "@src/resources/categories/entities/category.entity";
 import { Feedback } from "@src/resources/feedbacks/entities/feedback.entity";
 import { User } from "@src/resources/users/entities/user.entity";
 import { PEGIRating } from "../../../common/enums/pegi.enum";
+import { Media } from "@src/resources/medias/entities/media.entity";
+import { OperatingSystem } from "@src/resources/operating-systems/entities/operating-system.entity";
 
 @Entity({ name: "applications" })
 export class Application {
@@ -38,22 +40,9 @@ export class Application {
 	@Column("decimal", { precision: 3, scale: 2, unsigned: true, default: 0 })
 	discount = 0;
 
-	//TODO: Sujeto a ser eliminado debido a que se podría obtener mediante la cantidad de usuarios
-	@ApiProperty({ type: Number })
-	@Column("int", { unsigned: true, default: 0 })
-	downloads = 0;
-
 	@ApiProperty({ type: String })
 	@Column("varchar", { length: 9 })
 	spaces = "";
-
-	@ApiProperty({ type: String })
-	@Column("varchar", { length: 600, default: "" })
-	image_url = "";
-
-	@ApiProperty({ type: String })
-	@Column("varchar", { default: "" })
-	image_alt = "";
 
 	@ApiProperty({ enum: PEGIRating })
 	@Column({
@@ -61,7 +50,7 @@ export class Application {
 		enum: PEGIRating,
 		default: PEGIRating.Three,
 	})
-	PEGI_rating!: number;
+	pegi_rating!: PEGIRating;
 
 	@ApiProperty({ type: Date })
 	@CreateDateColumn()
@@ -70,6 +59,19 @@ export class Application {
 	@ApiProperty({ type: Date })
 	@UpdateDateColumn()
 	update_date: Date = new Date();
+
+	@ManyToMany(
+		() => OperatingSystem,
+		(operating_systems) => operating_systems.applications,
+	)
+	@JoinTable()
+	operating_systems!: OperatingSystem[];
+
+	@OneToMany(
+		() => Media,
+		(media: Media) => media.application,
+	)
+	medias!: Media[];
 
 	@ApiProperty({ type: [Category] })
 	@ManyToMany(

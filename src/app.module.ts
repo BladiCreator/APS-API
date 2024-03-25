@@ -1,7 +1,5 @@
 import { Module } from "@nestjs/common";
-import { ConfigModule, ConfigService } from "@nestjs/config";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { DataSource } from "typeorm";
+import { ConfigModule } from "@nestjs/config";
 
 import { HealthModule } from "@core/health/health.module";
 import { LoggerModule } from "@core/logger/logger.module";
@@ -12,6 +10,12 @@ import { CategoriesModule } from "./resources/categories/categories.module";
 import { CompaniesModule } from "./resources/companies/companies.module";
 import { FeedbacksModule } from "./resources/feedbacks/feedbacks.module";
 import { UsersModule } from "./resources/users/users.module";
+import { UserConfigurationsModule } from "./resources/user-configurations/user-configurations.module";
+import { BankAccountsModule } from "./resources/bank-accounts/bank-accounts.module";
+import { MediasModule } from "./resources/medias/medias.module";
+import { PaymentCardModule } from "./resources/payment-card/payment-card.module";
+import { OperatingSystemsModule } from "./resources/operating-systems/operating-systems.module";
+import { DatabaseModule } from './config/database/database.module';
 
 @Module({
 	imports: [
@@ -19,26 +23,8 @@ import { UsersModule } from "./resources/users/users.module";
 			isGlobal: true,
 			cache: true,
 		}),
-		TypeOrmModule.forRootAsync({
-			imports: [ConfigModule],
-			inject: [ConfigService],
-			useFactory: (configService: ConfigService) => ({
-				type: "mysql",
-				host: configService.get<string>("DATABASE_HOST"),
-				port: configService.get<number>("MYSQL_DOC_PORT"),
-				username: configService.get<string>("MYSQL_USER"),
-				password: configService.get<string>("MYSQL_PASSWORD"),
-				database: configService.get<string>("MYSQL_DATABASE"),
-				autoLoadEntities: true,
-				synchronize: true,
-			}),
-
-			dataSourceFactory: async (options) => {
-				const dataSource = await new DataSource(options!).initialize();
-				return dataSource;
-			},
-		}),
 		LoggerModule,
+		DatabaseModule,
 		HealthModule,
 		ApplicationsModule,
 		UsersModule,
@@ -46,6 +32,11 @@ import { UsersModule } from "./resources/users/users.module";
 		CategoriesModule,
 		AuthModule,
 		FeedbacksModule,
+		UserConfigurationsModule,
+		BankAccountsModule,
+		MediasModule,
+		PaymentCardModule,
+		OperatingSystemsModule,
 	],
 })
 export class AppModule {}

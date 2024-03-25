@@ -46,6 +46,7 @@ export class CategoriesController {
 	@UseGuards(AuthGuard, RolesGuard)
 	@UserRoles(UserRole.Admin)
 	@ApiBearerAuth()
+	@ApiBody({ type: UpdateCategoryDto })
 	update(
 		@Param("id") id: string,
 		@Body() updateCategoryDto: UpdateCategoryDto,
