@@ -36,6 +36,8 @@ export class ApplicationsService {
 		return await this.applicationRepository.find({
 			select: this.applicationMinimalSelect,
 			relations: {
+				operating_systems: true,
+				medias: true,
 				categories: true,
 			},
 		});
@@ -45,6 +47,8 @@ export class ApplicationsService {
 		return await this.applicationRepository.findOne({
 			where: { id: id },
 			relations: {
+				operating_systems: true,
+				medias: true,
 				categories: true,
 				feedbacks: true,
 			},

@@ -4,10 +4,8 @@ export const applicationMinimalSelect = {
 	description: false,
 	price: true,
 	discount: true,
-	downloads: false,
 	spaces: false,
-	image_url: true,
-	image_alt: true,
+	pegi_rating: false,
 	publication_date: false,
 	update_date: false,
 };
