@@ -1,18 +1,18 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { PaymentCardService } from '../../../../src/resources/payment-card/payment-card.service';
+import { Test, TestingModule } from "@nestjs/testing";
+import { PaymentCardService } from "../../../../src/resources/payment-card/payment-card.service";
 
-describe('PaymentCardService', () => {
-  let service: PaymentCardService;
+describe("PaymentCardService", () => {
+	let service: PaymentCardService;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [PaymentCardService],
-    }).compile();
+	beforeEach(async () => {
+		const module: TestingModule = await Test.createTestingModule({
+			providers: [PaymentCardService],
+		}).compile();
 
-    service = module.get<PaymentCardService>(PaymentCardService);
-  });
+		service = module.get<PaymentCardService>(PaymentCardService);
+	});
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
+	it("should be defined", () => {
+		expect(service).toBeDefined();
+	});
 });

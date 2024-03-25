@@ -13,6 +13,6 @@ export default new DataSource({
 	username: configService.get<string>("MYSQL_USER"),
 	password: configService.get<string>("MYSQL_PASSWORD"),
 	database: configService.get<string>("MYSQL_DATABASE"),
-  migrations: ["src/database/migrations/*{.ts,.js}"],
-  entities: ["src/resources/**/entities/*.entity{.ts,.js}"],
+	migrations: ["src/database/migrations/*{.ts,.js}"],
+	entities: ["src/resources/**/entities/*.entity{.ts,.js}"],
 });

@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { PEGIRating } from "@src/common/enums/pegi.enum";
 import { Category } from "@src/resources/categories/entities/category.entity";
-import { OperatingSystem } from "../../operating-systems/entities/operating-system.entity";
+import { Media } from "@src/resources/medias/entities/media.entity";
 import {
 	IsArray,
 	IsEnum,
@@ -11,7 +11,7 @@ import {
 	IsString,
 	MaxLength,
 } from "class-validator";
-import { Media } from "@src/resources/medias/entities/media.entity";
+import { OperatingSystem } from "../../operating-systems/entities/operating-system.entity";
 
 export class CreateApplicationDto {
 	@ApiProperty()
@@ -52,7 +52,7 @@ export class CreateApplicationDto {
 	@IsArray()
 	@IsNotEmpty()
 	categories: Category[];
-	
+
 	@ApiProperty({ type: [OperatingSystem] })
 	@IsArray()
 	@IsNotEmpty()

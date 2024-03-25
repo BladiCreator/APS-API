@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common";
-import { OperatingSystemsService } from "./operating-systems.service";
-import { OperatingSystemsController } from "./operating-systems.controller";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { OperatingSystem } from "./entities/operating-system.entity";
+import { OperatingSystemsController } from "./operating-systems.controller";
+import { OperatingSystemsService } from "./operating-systems.service";
 
 @Module({
 	imports: [TypeOrmModule.forFeature([OperatingSystem])],

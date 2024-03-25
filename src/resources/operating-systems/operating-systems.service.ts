@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 import { CreateOperatingSystemDto } from "./dto/create-operating-system.dto";
 import { UpdateOperatingSystemDto } from "./dto/update-operating-system.dto";
-import { InjectRepository } from "@nestjs/typeorm";
 import { OperatingSystem } from "./entities/operating-system.entity";
-import { Repository } from "typeorm";
 
 @Injectable()
 export class OperatingSystemsService {

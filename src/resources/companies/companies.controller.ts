@@ -11,9 +11,9 @@ import {
 
 import { ApiBearerAuth, ApiBody, ApiTags } from "@nestjs/swagger";
 import { UserRoles } from "@src/common/decorators/roles.decorator";
+import { UserRole } from "@src/common/enums/user-roles.enum";
 import { AuthGuard } from "@src/common/guards/auth.guard";
 import { RolesGuard } from "@src/common/guards/roles.guard";
-import { UserRole } from "@src/common/enums/user-roles.enum";
 import { CompaniesService } from "./companies.service";
 import { CreateCompanyDto } from "./dto/create-company.dto";
 import { UpdateCompanyDto } from "./dto/update-company.dto";

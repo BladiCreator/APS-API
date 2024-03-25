@@ -1,20 +1,20 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { MediasController } from '../../../../src/resources/medias/medias.controller';
-import { MediasService } from '../../../../src/resources/medias/medias.service';
+import { Test, TestingModule } from "@nestjs/testing";
+import { MediasController } from "../../../../src/resources/medias/medias.controller";
+import { MediasService } from "../../../../src/resources/medias/medias.service";
 
-describe('MediasController', () => {
-  let controller: MediasController;
+describe("MediasController", () => {
+	let controller: MediasController;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [MediasController],
-      providers: [MediasService],
-    }).compile();
+	beforeEach(async () => {
+		const module: TestingModule = await Test.createTestingModule({
+			controllers: [MediasController],
+			providers: [MediasService],
+		}).compile();
 
-    controller = module.get<MediasController>(MediasController);
-  });
+		controller = module.get<MediasController>(MediasController);
+	});
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
+	it("should be defined", () => {
+		expect(controller).toBeDefined();
+	});
 });

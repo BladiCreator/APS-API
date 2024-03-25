@@ -27,7 +27,6 @@ export class FeedbacksController {
 	@UserRoles(UserRole.User, UserRole.Developer, UserRole.Admin)
 	@UseGuards(AuthGuard, RolesGuard)
 	create(@Body() createFeedbackDto: CreateFeedbackDto) {
-		console.log(createFeedbackDto);
 		return this.feedbacksService.create(createFeedbackDto);
 	}
 

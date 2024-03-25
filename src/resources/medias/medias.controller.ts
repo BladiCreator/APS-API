@@ -1,18 +1,18 @@
 import {
-	Controller,
-	Get,
-	Post,
 	Body,
-	Patch,
-	Param,
+	Controller,
 	Delete,
+	Get,
+	Param,
+	Patch,
+	Post,
 	UseGuards,
 } from "@nestjs/common";
-import { MediasService } from "./medias.service";
+import { ApiBearerAuth, ApiBody, ApiTags } from "@nestjs/swagger";
+import { AuthGuard } from "@src/common/guards/auth.guard";
 import { CreateMediaDto } from "./dto/create-media.dto";
 import { UpdateMediaDto } from "./dto/update-media.dto";
-import { AuthGuard } from "@src/common/guards/auth.guard";
-import { ApiBearerAuth, ApiBody, ApiTags } from "@nestjs/swagger";
+import { MediasService } from "./medias.service";
 
 @Controller("medias")
 @ApiTags("Medias")

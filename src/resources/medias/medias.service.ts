@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 import { CreateMediaDto } from "./dto/create-media.dto";
 import { UpdateMediaDto } from "./dto/update-media.dto";
-import { InjectRepository } from "@nestjs/typeorm";
 import { Media } from "./entities/media.entity";
-import { Repository } from "typeorm";
 
 @Injectable()
 export class MediasService {

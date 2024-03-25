@@ -3,7 +3,6 @@ import { TypeBankAccount } from "@src/common/enums/type_bank_account.enum";
 import { IsEnum, IsNotEmpty, IsString, MaxLength } from "class-validator";
 
 export class CreateBankAccountDto {
-
 	@ApiProperty()
 	@IsString()
 	@IsNotEmpty()

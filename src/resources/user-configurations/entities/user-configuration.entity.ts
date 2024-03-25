@@ -1,21 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { AbstractEntity } from "@src/common/classes/abstract-entity.class";
 import { BankAccount } from "@src/resources/bank-accounts/entities/bank-account.entity";
 import { PaymentCard } from "@src/resources/payment-card/entities/payment-card.entity";
-import {
-	Column,
-	Entity,
-	OneToMany,
-	OneToOne,
-	PrimaryGeneratedColumn,
-} from "typeorm";
-import { v4 as uuidv4 } from "uuid";
+import { Column, Entity, OneToMany, OneToOne } from "typeorm";
 
 @Entity({ name: "user_configurations" })
-export class UserConfiguration {
-	@ApiProperty({ type: String })
-	@PrimaryGeneratedColumn("uuid")
-	id: string = uuidv4();
-
+export class UserConfiguration extends AbstractEntity {
 	@ApiProperty({ type: String })
 	@Column("varchar", { length: 10, default: "light" })
 	theme = "light";

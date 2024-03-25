@@ -1,14 +1,10 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { AbstractEntity } from "@src/common/classes/abstract-entity.class";
 import { TypeBankAccount } from "@src/common/enums/type_bank_account.enum";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { v4 as uuidv4 } from "uuid";
+import { Column, Entity } from "typeorm";
 
 @Entity({ name: "bank_accounts" })
-export class BankAccount {
-	@ApiProperty({ type: String })
-	@PrimaryGeneratedColumn("uuid")
-	id: string = uuidv4();
-
+export class BankAccount extends AbstractEntity {
 	//TODO: Investigar la longitud del numero de cuenta
 	@ApiProperty({ type: String })
 	@Column("varchar", { length: 60 })

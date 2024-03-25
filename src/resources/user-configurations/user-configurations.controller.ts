@@ -1,18 +1,18 @@
 import {
-	Controller,
-	Get,
-	Post,
 	Body,
-	Patch,
-	Param,
+	Controller,
 	Delete,
+	Get,
+	Param,
+	Patch,
+	Post,
 	UseGuards,
 } from "@nestjs/common";
-import { UserConfigurationsService } from "./user-configurations.service";
+import { ApiBearerAuth, ApiBody, ApiTags } from "@nestjs/swagger";
+import { AuthGuard } from "@src/common/guards/auth.guard";
 import { CreateUserConfigurationDto } from "./dto/create-user-configuration.dto";
 import { UpdateUserConfigurationDto } from "./dto/update-user-configuration.dto";
-import { AuthGuard } from "@src/common/guards/auth.guard";
-import { ApiBearerAuth, ApiBody, ApiTags } from "@nestjs/swagger";
+import { UserConfigurationsService } from "./user-configurations.service";
 
 @UseGuards(AuthGuard)
 @ApiBearerAuth()

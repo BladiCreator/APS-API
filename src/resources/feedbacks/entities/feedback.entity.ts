@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { AbstractEntity } from "@src/common/classes/abstract-entity.class";
 import { Application } from "@src/resources/applications/entities/application.entity";
 import { User } from "@src/resources/users/entities/user.entity";
 import {
@@ -6,17 +7,11 @@ import {
 	CreateDateColumn,
 	Entity,
 	ManyToOne,
-	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from "typeorm";
-import { v4 as uuidv4 } from "uuid";
 
 @Entity({ name: "feedbacks" })
-export class Feedback {
-	@ApiProperty({ type: String })
-	@PrimaryGeneratedColumn("uuid")
-	id: string = uuidv4();
-
+export class Feedback extends AbstractEntity {
 	@ApiProperty({ type: Number })
 	@Column({ type: "int", default: 1, unsigned: true, width: 1 })
 	rate = 1;
@@ -46,7 +41,7 @@ export class Feedback {
 		(application: Application) => application.feedbacks,
 		{
 			onDelete: "CASCADE",
-		}
+		},
 	)
 	application: Application = new Application();
 }

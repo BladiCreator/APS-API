@@ -1,14 +1,10 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { v4 as uuidv4 } from "uuid";
+import { AbstractEntity } from "@src/common/classes/abstract-entity.class";
+import { Column, Entity, ManyToMany } from "typeorm";
 import { Application } from "../../applications/entities/application.entity";
 
 @Entity({ name: "operating_systems" })
-export class OperatingSystem {
-	@ApiProperty({ type: String })
-	@PrimaryGeneratedColumn("uuid")
-	id: string = uuidv4();
-
+export class OperatingSystem extends AbstractEntity {
 	@ApiProperty({ type: String })
 	@Column("varchar", { length: 60, unique: true })
 	name = "";

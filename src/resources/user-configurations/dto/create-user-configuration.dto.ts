@@ -1,7 +1,13 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { BankAccount } from "@src/resources/bank-accounts/entities/bank-account.entity";
 import { PaymentCard } from "@src/resources/payment-card/entities/payment-card.entity";
-import { IsArray, IsBoolean, IsOptional, IsString, MaxLength } from "class-validator";
+import {
+	IsArray,
+	IsBoolean,
+	IsOptional,
+	IsString,
+	MaxLength,
+} from "class-validator";
 
 export class CreateUserConfigurationDto {
 	@ApiProperty()

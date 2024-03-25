@@ -1,12 +1,12 @@
-import { Module } from '@nestjs/common';
-import { UserConfigurationsService } from './user-configurations.service';
-import { UserConfigurationsController } from './user-configurations.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserConfiguration } from './entities/user-configuration.entity';
+import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { UserConfiguration } from "./entities/user-configuration.entity";
+import { UserConfigurationsController } from "./user-configurations.controller";
+import { UserConfigurationsService } from "./user-configurations.service";
 
 @Module({
-  imports: [ TypeOrmModule.forFeature([UserConfiguration]) ],
-  controllers: [UserConfigurationsController],
-  providers: [UserConfigurationsService],
+	imports: [TypeOrmModule.forFeature([UserConfiguration])],
+	controllers: [UserConfigurationsController],
+	providers: [UserConfigurationsService],
 })
 export class UserConfigurationsModule {}

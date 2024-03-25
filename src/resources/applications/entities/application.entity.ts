@@ -5,25 +5,20 @@ import {
 	JoinTable,
 	ManyToMany,
 	OneToMany,
-	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from "typeorm";
-import { v4 as uuidv4 } from "uuid";
 
 import { ApiProperty } from "@nestjs/swagger";
+import { AbstractEntity } from "@src/common/classes/abstract-entity.class";
 import { Category } from "@src/resources/categories/entities/category.entity";
 import { Feedback } from "@src/resources/feedbacks/entities/feedback.entity";
-import { User } from "@src/resources/users/entities/user.entity";
-import { PEGIRating } from "../../../common/enums/pegi.enum";
 import { Media } from "@src/resources/medias/entities/media.entity";
 import { OperatingSystem } from "@src/resources/operating-systems/entities/operating-system.entity";
+import { User } from "@src/resources/users/entities/user.entity";
+import { PEGIRating } from "../../../common/enums/pegi.enum";
 
 @Entity({ name: "applications" })
-export class Application {
-	@ApiProperty({ type: String })
-	@PrimaryGeneratedColumn("uuid")
-	id: string = uuidv4();
-
+export class Application extends AbstractEntity {
 	@ApiProperty({ type: String })
 	@Column("varchar", { length: 89 })
 	name = "";
