@@ -28,6 +28,7 @@ import {
 	FilesInterceptor,
 } from "@nest-lab/fastify-multer";
 import { multerConfigs } from "@src/config/multer.config";
+import { CreateMediasDto } from "./dto/create-medias.dto";
 
 @Controller("medias")
 @ApiTags("Medias")
@@ -47,6 +48,7 @@ export class MediasController {
 			properties: {
 				file: {
 					type: "string",
+					description: "Image to upload",
 					format: "binary",
 				},
 				alt: {
@@ -74,16 +76,27 @@ export class MediasController {
 			properties: {
 				files: {
 					type: "array",
+					description: "Images to upload",
 					items: {
 						type: "string",
 						format: "binary",
 					},
 				},
+				alt: {
+					type: "array",
+					description: "Alternative text for the media",
+					items: {
+						type: "string",
+					},
+				}
 			},
 		},
 	})
-	multipleFilesImage(@UploadedFiles() filesImage: Array<File>) {
-		return this.mediasService.createImages(filesImage);
+	multipleFilesImage(
+		@Body() createMediasDto: CreateMediasDto,
+		@UploadedFiles() filesImage: Array<File>,
+	) {
+		return this.mediasService.createImages(createMediasDto, filesImage);
 	}
 
 	@Get()
