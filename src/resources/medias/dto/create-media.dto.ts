@@ -1,11 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsString, IsUrl, MaxLength } from "class-validator";
+import { IsNotEmpty, IsOptional, IsString, IsUrl, MaxLength } from "class-validator";
 
 export class CreateMediaDto {
 	@ApiProperty()
 	@IsString()
-	@IsNotEmpty()
 	@MaxLength(600)
+	@IsOptional()
 	@IsUrl()
 	url: string;
 

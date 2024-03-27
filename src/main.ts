@@ -8,6 +8,8 @@ import {
 
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { AppModule } from "./app.module";
+import fastifyStatic from "@fastify/static";
+import { join } from "path";
 
 async function bootstrap() {
 	const app = await NestFactory.create<NestFastifyApplication>(
@@ -26,7 +28,7 @@ async function bootstrap() {
 		}),
 	);
 
-	const config = new DocumentBuilder()
+	const swaggerConfig = new DocumentBuilder()
 		.setTitle("APS API Documentation")
 		.setDescription(
 			"Application API for APS Web App to upload and download applications",
@@ -34,12 +36,19 @@ async function bootstrap() {
 		.setVersion("1.0")
 		.addBearerAuth()
 		.build();
-	const document = SwaggerModule.createDocument(app, config);
+	const document = SwaggerModule.createDocument(app, swaggerConfig);
 	SwaggerModule.setup("docs", app, document);
 
+	//* Use of ConfigService to get environment variables
 	const configService = app.get(ConfigService);
-	const port = configService.get<string>("PORT", "3000");
 
+	const upload_location = configService.getOrThrow<string>("UPLOAD_LOCATION");
+	app.register(fastifyStatic, {
+		root: join(__dirname, `./../${upload_location}`), // Directorio donde se guardan los archivos
+		prefix: "/uploads/", // Ruta URL para acceder a los archivos ( ejemplo: http://localhost:3000/uploads/images/imagen.jpg )
+	});
+
+	const port = configService.get<string>("PORT", "3000");
 	await app.listen(port, "0.0.0.0");
 
 	const logger = app.get(Logger);
