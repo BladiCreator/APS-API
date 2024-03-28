@@ -29,6 +29,23 @@ export class MediasService {
 		this.upload_location_apps = getLocationConfig("UPLOAD_LOCATION_APPS");
 	}
 
+	async createFile(createMediaDto: CreateMediaDto, file: File) {
+		createMediaDto.url = `${this.getUploadLocation(file)}/${file.filename}`;
+		return await this.mediaRepository.save(createMediaDto);
+	}
+
+	async createFiles(createMediasDto: CreateMediasDto, files: Array<File>) {
+		const createMediaDtoList: CreateMediaDto[] = createMediasDto.alt.map(
+			(alt, index) => {
+				return new CreateMediaDto(
+					`${this.getUploadLocation(files[index])}/${files[index].filename}`,
+					alt,
+				);
+			},
+		);
+		return await this.mediaRepository.save(createMediaDtoList);
+	}
+
 	async findAll() {
 		return await this.mediaRepository.find();
 	}
@@ -43,11 +60,21 @@ export class MediasService {
 		return media;
 	}
 
-	async update(id: string, updateMediaDto: UpdateMediaDto) {
+	async updateFile(id: string, updateMediaDto: UpdateMediaDto, file?: File) {
+		const media = await this.findOne(id);
+
+		if (!media) {
+			throw new NotFoundException("Media does not exist!");
+		}
+		if (file) {
+			await this.deleteFile(media.url);
+			updateMediaDto.url = `${this.getUploadLocation(file)}/${file.filename}`;
+		}
+
 		return await this.mediaRepository.save({ id: id, ...updateMediaDto });
 	}
 
-	async remove(id: string) {
+	async removeFile(id: string) {
 		const media = await this.findOne(id);
 
 		if (!media) {
@@ -59,44 +86,25 @@ export class MediasService {
 		return await this.mediaRepository.remove(media);
 	}
 
-	//TODO: devolver la url para poder acceder al archivo
-	// async saveFile(request: FastifyRequest, file: File) {
-	// 	console.log(file);
-	// 	console.log(`/image/${file.filename}`);
-	// }
-
-	// async saveFiles(files: Array<File>) {
-	// 	console.log(files);
-	// }
-
-	async createImage(createMediaDto: CreateMediaDto, fileImage: File) {
-		createMediaDto.url = `${this.upload_location_images}/${fileImage.filename}`;
-		return await this.mediaRepository.save(createMediaDto);
-	}
-
-	async createImages(
-		createMediasDto: CreateMediasDto,
-		filesImage: Array<File>,
-	) {
-		const createMediaDtoList: CreateMediaDto[] = createMediasDto.alt.map(
-			(alt, index) => {
-				return new CreateMediaDto(
-					`${this.upload_location_images}/${filesImage[index].filename}`,
-					alt,
-				);
-			},
-		);
-		return await this.mediaRepository.save(createMediaDtoList);
-	}
+	//*** PRIVATE METHODS ****/
 
 	private async deleteFile(url: string) {
 		const filePath = path.join(__dirname, "../../../", url);
 		try {
 			await fs.unlink(filePath);
-			this.logger.log(`File ${filePath.split("\\").at(-1)} deleted successfully`);
+			this.logger.log(
+				`File ${filePath.split("\\").at(-1)} deleted successfully`,
+			);
 		} catch (err) {
 			this.logger.error(`Error deleting file ${filePath}`, err);
 			throw err;
 		}
+	}
+
+	private getUploadLocation(file: File) {
+		const newLocation = file.mimetype.includes("image/")
+			? this.upload_location_images
+			: this.upload_location_apps;
+		return `${newLocation}/${file.filename}`;
 	}
 }

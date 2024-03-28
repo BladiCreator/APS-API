@@ -66,7 +66,7 @@ export class Application extends AbstractEntity {
 		() => Media,
 		(media: Media) => media.application,
 		{
-			nullable: true,
+			nullable: true,//TODO: Es una medida temporal, la app no puede estar sin media(Imágenes)
 		},
 	)
 	medias!: Media[];
