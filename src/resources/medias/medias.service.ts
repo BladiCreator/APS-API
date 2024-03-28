@@ -66,6 +66,7 @@ export class MediasService {
 		if (!media) {
 			throw new NotFoundException("Media does not exist!");
 		}
+
 		if (file) {
 			await this.deleteFile(media.url);
 			updateMediaDto.url = `${this.getUploadLocation(file)}/${file.filename}`;
