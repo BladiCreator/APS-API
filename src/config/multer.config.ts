@@ -1,8 +1,8 @@
-import multer from "fastify-multer";
-import { v4 as uuidv4 } from "uuid";
-import { FastifyRequest } from "fastify";
 import { File, GetFileName } from "@nest-lab/fastify-multer";
 import { ConfigService } from "@nestjs/config";
+import { FastifyRequest } from "fastify";
+import multer from "fastify-multer";
+import { v4 as uuidv4 } from "uuid";
 
 const configService = new ConfigService();
 

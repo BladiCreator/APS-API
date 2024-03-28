@@ -9,7 +9,7 @@ import {
 	UseGuards,
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiBody, ApiTags } from "@nestjs/swagger";
-import { AuthGuard } from "@src/common/guards/auth.guard"; 
+import { AuthGuard } from "@src/common/guards/auth.guard";
 import { BankAccountsService } from "./bank-accounts.service";
 import { CreateBankAccountDto } from "./dto/create-bank-account.dto";
 import { UpdateBankAccountDto } from "./dto/update-bank-account.dto";

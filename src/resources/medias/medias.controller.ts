@@ -1,4 +1,9 @@
 import {
+	File,
+	FileInterceptor,
+	FilesInterceptor,
+} from "@nest-lab/fastify-multer";
+import {
 	Body,
 	Controller,
 	Delete,
@@ -19,21 +24,16 @@ import {
 	ApiOperation,
 	ApiTags,
 } from "@nestjs/swagger";
-import { AuthGuard } from "@src/common/guards/auth.guard";
-import { CreateMediaDto } from "./dto/create-media.dto";
-import { UpdateMediaDto } from "./dto/update-media.dto";
-import { MediasService } from "./medias.service";
-import {
-	File,
-	FileInterceptor,
-	FilesInterceptor,
-} from "@nest-lab/fastify-multer";
-import { multerConfigs } from "@src/config/multer.config";
-import { CreateMediasDto } from "./dto/create-medias.dto";
 import { SchemaObject } from "@nestjs/swagger/dist/interfaces/open-api-spec.interface";
-import { RolesGuard } from "@src/common/guards/roles.guard";
 import { UserRoles } from "@src/common/decorators/roles.decorator";
 import { UserRole } from "@src/common/enums/user-roles.enum";
+import { AuthGuard } from "@src/common/guards/auth.guard";
+import { RolesGuard } from "@src/common/guards/roles.guard";
+import { multerConfigs } from "@src/config/multer.config";
+import { CreateMediaDto } from "./dto/create-media.dto";
+import { CreateMediasDto } from "./dto/create-medias.dto";
+import { UpdateMediaDto } from "./dto/update-media.dto";
+import { MediasService } from "./medias.service";
 
 const apiBodyOptionsFile: ApiBodyOptions = {
 	required: true,

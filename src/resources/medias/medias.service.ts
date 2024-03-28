@@ -1,14 +1,14 @@
+import { promises as fs } from "fs";
+import path from "path";
+import { File } from "@nest-lab/fastify-multer";
 import { Inject, Injectable, Logger, NotFoundException } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { CreateMediaDto } from "./dto/create-media.dto";
+import { CreateMediasDto } from "./dto/create-medias.dto";
 import { UpdateMediaDto } from "./dto/update-media.dto";
 import { Media } from "./entities/media.entity";
-import { File } from "@nest-lab/fastify-multer";
-import { ConfigService } from "@nestjs/config";
-import { CreateMediasDto } from "./dto/create-medias.dto";
-import path from "path";
-import { promises as fs } from "fs";
 
 @Injectable()
 export class MediasService {
