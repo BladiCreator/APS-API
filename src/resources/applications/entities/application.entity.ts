@@ -65,6 +65,9 @@ export class Application extends AbstractEntity {
 	@OneToMany(
 		() => Media,
 		(media: Media) => media.application,
+		{
+			nullable: true,
+		},
 	)
 	medias!: Media[];
 
